@@ -1,0 +1,19 @@
+.wrap {
+    width: 80%;
+    padding: 40px;
+    border: 1px solid #e4ebf0;
+    border-radius: 7px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.paramOption {
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+

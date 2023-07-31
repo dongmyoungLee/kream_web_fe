@@ -1,0 +1,214 @@
+.section {
+    width: 100%;
+}
+
+.signup_section {
+    width: 100%;
+    height: 100vh;
+    background: rgb(246, 249, 250);
+}
+
+.section .wrap {
+    width: 100%;
+    display: flex;
+}
+
+.mWrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.aside {
+    width: 40%;
+    height: calc(100vh - 57px);
+    background-color: #fff;
+    position: relative;
+}
+.logo {
+    margin-bottom: 15px;
+}
+
+.centerPosition {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.paramOption {
+    text-align: center;
+    color: #0062df;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.article {
+    width: 100%;
+    height: calc(100vh - 57px);
+    background-color: rgb(246, 249, 250);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup_article {
+    width: 100%;
+    padding: 20px 0;
+    /*height: 100vh;*/
+    background-color: rgb(246, 249, 250);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formWrap {
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.formOption {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border: 1px solid rgb(228, 235, 240);
+}
+
+.generalForm {
+    width: 100%;
+    height: 450px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mobileGeneralForm {
+    padding: 32px 24px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.error {
+    color: #ff0000;
+}
+
+.signUpBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.signUpBox p {
+    cursor: pointer;
+}
+
+.mobileSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*height: calc(100vh - 57px);*/
+    height: 100vh;
+    background: #f6f9fa;
+}
+
+.hide_mobileSection {
+    display: none;
+}
+
+.mobileAside {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobileCenterOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mobileLogo {
+    height: 42px;
+    margin-bottom: 15px;
+}
+
+.mobileParamOption {
+    text-align: center;
+    color: #0062df;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.mobileArticle {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(246, 249, 250);
+    padding-top: 50px;
+}
+
+.signup_mobileArticle {
+    width: 100%;
+    /*height: 100%;*/
+    background-color: rgb(246, 249, 250);
+    padding: 15px 0;
+}
+
+
+.mobileFormWrap {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 0 auto;
+}
+
+.findPwdFormWrap {
+    width: 400px;
+    /*height: 300px;*/
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid rgb(228, 235, 240);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobileFindPwdFormWrap {
+    width: 280px;
+    height: 270px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid rgb(228, 235, 240);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.marginOption {
+    margin-bottom: 25px;
+}
+
+.fontSizeDefault {
+    font-size: 16px;
+}
+
+.gapOption {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,0 +1,386 @@
+.wellComeInfo {
+    padding: 40px 0 0;
+}
+
+.wrapper {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid #0062df;
+    background: rgb(41 138 255 / 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.textOption1 {
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #0062df;
+}
+
+.textOption2 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 160%;
+    color: #0062df;
+}
+
+.imgOption {
+    width: 20px;
+    height: 20px;
+}
+
+.flexOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnWrap {
+    width: 150px;
+}
+
+.categorySection {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0 0;
+    position: relative;
+
+}
+
+.jobCategory {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.jobTitle {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 140%;
+    color: #141617;
+}
+
+.circle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e4ebf0;
+    border-radius: 50%;
+    position: relative;
+}
+
+.circle_imgOption {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}
+
+.searchCategory {
+    width: 247px;
+
+}
+
+.formStyle {
+    width: 100%;
+    border-radius: 40px;
+    border: none;
+    border: 1px solid #e4ebf0;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputOption {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160%;
+    outline: none;
+}
+
+.inputOption::placeholder {
+    color: #3a3e41;
+    outline: none;
+    border: none;
+}
+
+.inputOption::-ms-clear,
+.inputOption::-ms-reveal{
+    cursor: pointer;
+}
+.inputOption::-webkit-search-decoration,
+.inputOption::-webkit-search-cancel-button,
+.inputOption::-webkit-search-results-button,
+.inputOption::-webkit-search-results-decoration{
+    cursor: pointer;
+}
+
+.filterArticle {
+    position: relative;
+    display: flex;
+    gap: 15px;
+}
+
+.filterSection {
+    margin-top: 32px;
+}
+.filterOption {
+    padding: 12px 16px 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e4ebf0;
+    color: #3a3e41;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #fff;
+}
+
+.displayFilter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filterImgOption {
+    width: 12px;
+    height: 12px;
+}
+
+.marginfilter {
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filterText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.labelOption {
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160%;
+    color: rgb(58, 62, 65);
+    cursor: pointer;
+    padding: 8px 40px 8px 3px;
+}
+
+.filterNum {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: #0062df;
+}
+
+.detailMenu {
+    position: absolute;
+    border-radius: 8px;
+    border: 1px solid rgb(215, 224, 230);
+    box-shadow: rgba(20, 22, 23, 0.2) 0px 8px 20px;
+    padding: 8px 0px;
+    top: 60px;
+    background: #fff;
+    z-index: 10;
+}
+
+.categoryDetailMenu {
+    position: absolute;
+    border-radius: 8px;
+    border: 1px solid rgb(215, 224, 230);
+    box-shadow: rgba(20, 22, 23, 0.2) 0px 8px 20px;
+    padding: 8px 0px;
+    top: 90px;
+    background: #fff;
+    z-index: 10;
+}
+
+
+
+.filterFlex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding-left: 12px;
+}
+.filterFlex:hover {
+    background-color: rgba(0,98,223, 0.2);
+}
+
+.filterText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160%;
+    color: rgb(58, 62, 65);
+}
+
+.flexCommon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkBoxInput {
+    cursor: pointer;
+}
+.outsideLayOut {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.itemWrap {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filterItem {
+    gap: 4px;
+    background-color: rgb(41 138 255 / 0.1);
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 160%;
+    color: #0062df;
+    cursor: pointer;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.spanMr {
+    padding: 5px 0 5px 10px;
+}
+
+.spanSize {
+    height: 100%;
+    font-size: 20px;
+    color: rgb(199, 210, 216);
+    padding: 4px 6px 4px 0;
+}
+
+.mainContents {
+    padding: 40px 0;
+}
+
+.mainCardWrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 20px;
+}
+
+.mainCard {
+    width: calc(100% / 4 - 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.imgArea {
+    height: 158px;
+    background-color: rgb(242, 246, 248);
+    border: 1px solid rgb(228, 235, 240);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mainNameArea {
+
+}
+
+.mainJobArea {
+
+}
+
+.mainJobText {
+    font-weight: 600;
+    font-size: 18px;
+    color: #3a3e41;
+}
+
+.iconInfoArea {
+    display: flex;
+    gap: 8px;
+}
+
+.iconInfo {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: rgb(129, 137, 143);
+}
+
+.iconWrap {
+    display: flex;
+    align-content: center;
+    gap: 3px;
+}
+
+.iconInfoText {
+    color: rgb(129, 137, 143);
+    font-size: 13px;
+}
+
+.bannerArea {
+    cursor: pointer;
+    padding-right: 20px;
+}
+
+.bannerAreaSection {
+    height: 132px;
+    padding: 0px 48px;
+    border-radius: 12px;
+    background-color: rgba(0,98,223, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bannerImg {
+    height: 100%;
+}
+
+.bannerTextArea {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bannerH3Option {
+    font-weight: 600;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+}
+
+.bannerBtn {
+    width: fit-content;
+    padding: 10px 10px 10px 16px;
+    border-radius: 24px;
+    background-color: rgb(255, 203, 64);
+    font-weight: 700;
+    font-size: 12px;
+}

@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/common/reset.css'
+import Header from "./components/pages/Layout/Header";
+import {Outlet} from "react-router-dom";
+import {Mobile, PC} from "./components/config/Responsive";
+import MobileHeader from "./components/pages/Layout/MobileHeader";
+import HeightSpace from "./components/atoms/HeightSpace";
+import Company from "./components/pages/Infomation/Company";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div id='wrap'>
+        <main>
+          <PC>
+            <HeightSpace />
+            <Header />
+            <Company />
+          </PC>
+          <Mobile>
+            <HeightSpace />
+            <MobileHeader />
+            <Company />
+          </Mobile>
+          <Outlet />
+        </main>
+      </div>
   );
 }
 

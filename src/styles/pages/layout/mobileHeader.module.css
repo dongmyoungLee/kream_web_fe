@@ -1,0 +1,51 @@
+.header {
+    width: 100%;
+    height: 57px;
+    padding: 9px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(228, 235, 240);
+    z-index: 10;
+}
+
+.mobileHeaderWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img {
+    height: 24px;
+    cursor: pointer;
+}
+
+.menuImg {
+    height: 20px;
+    cursor: pointer;
+}
+
+.mobileMenuWrap {
+    width: 100%;
+    height: calc(100vh - 57px);
+    padding: 48px 16px;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    border-bottom: 1px solid rgb(228, 235, 240);
+    padding-bottom: 35px;
+    margin-bottom: 35px;
+}
+
+

@@ -1,0 +1,11 @@
+.param {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.mobileMenuListWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
