@@ -80,7 +80,7 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .input_name{
@@ -732,3 +732,79 @@
     font-weight: 600;
     color: #ee1c25;
 }
+
+.deliContent {
+    padding: 20px 15px;
+    display: flex;
+}
+
+.deliContentLeft {
+    width: 50%;
+}
+
+.deliContentRight {
+    width: 50%;
+    display: flex;
+}
+
+.leftContents {
+    display: flex;
+    gap: 20px;
+}
+
+.imgWrap {
+    width: 100px;
+    height: 100px;
+    background: rgb(246, 238, 237);
+    border-radius: 10px;
+}
+
+.imgSize {
+    width: 100%;
+    height: 100%;
+}
+
+.firstText {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.secondText {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.thirdText {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.fourthText {
+    font-size: 14px;
+    color: #666;
+}
+
+.priceBox {
+    width: 170px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.priceBox2 {
+    width: 170px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+

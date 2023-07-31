@@ -15,6 +15,7 @@ import HeaderSection from "./components/pages/Layout/HeaderSection";
 import ProfileUpdate from './components/pages/Infomation/ProfileUpdate';
 import UserBookmark from "./components/pages/Layout/UserBookmark";
 import Order from "./components/pages/Infomation/Order";
+import Details from "./components/pages/Infomation/Details";
 
 const router = createBrowserRouter([
   {
@@ -60,9 +61,14 @@ const router = createBrowserRouter([
       {
         path : 'follow',
         element: <Follow />
-      },{
+      },
+      {
         path : 'order',
         element: <Order />
+      }
+      ,{
+        path : 'details',
+        element: <Details />
       },
 
     ]

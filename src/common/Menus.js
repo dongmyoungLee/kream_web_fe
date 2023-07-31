@@ -30,12 +30,6 @@ export const mypageFavMenu = [
     path : '/member/bookmark',
   },
   {
-    menuName : '배송 정보',
-    imgPath : follow_img,
-    clickFlag : 'follow',
-    path : '/member/follow',
-  },
-  {
     menuName : '주문 내역',
     imgPath : myHistory2,
     clickFlag : 'order',
@@ -73,12 +67,6 @@ export const mypageTooltipMenu2 = [
     imgPath : bookmark_img,
     clickFlag : 'bookmark',
     path : '/member/bookmark',
-  },
-  {
-    menuName : '배송정보',
-    imgPath : myProfile,
-    clickFlag: 'follow',
-    path : '/member/follow',
   },
   {
     menuName : '주문 내역',

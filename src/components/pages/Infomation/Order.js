@@ -6,6 +6,7 @@ import InputDivComponent from "../../blocks/InputDivComponent";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import Applicant2 from "../../blocks/Applicant2";
+import s1 from "../../../asset/images/s1.webp";
 
 
 const Order = () => {
@@ -53,7 +54,7 @@ const Order = () => {
   </div>
 
   return (
-    <MypageLayout remove_height="profile" >
+    <MypageLayout >
       <Applicant2 />
       <div className={classes.account}>
         <div className={classes.management_box}>
@@ -101,18 +102,46 @@ const Order = () => {
             <h2 className={classes.h2_option2}>배송 현황</h2>
           </div>
         </div>
-
-        <div className={classes.line3}></div>
-        <div className={classes.deliItem}>
-          <div className={classes.rightDeli}>
-            <p>주문 번호 <span className={classes.spanHighlight}>2023071827746</span></p>
-            <p>주문 일시 <span className={classes.spanHighlight}>2023-07-18 11:17:25</span></p>
+        <div>
+          <div className={classes.line3}></div>
+          <div className={classes.deliItem}>
+            <div className={classes.rightDeli}>
+              <p>주문 번호 <span className={classes.spanHighlight}>2023071827746</span></p>
+              <p>주문 일시 <span className={classes.spanHighlight}>2023-07-18 11:17:25</span></p>
+            </div>
+            <div className={classes.leftDeli}>
+              <p>총 결제금액 <span className={classes.priceSpan}>8,000,000원</span></p>
+            </div>
           </div>
-          <div className={classes.leftDeli}>
-            <p>총 결제금액 <span className={classes.priceSpan}>118,000원</span></p>
+          <div className={classes.line3}></div>
+          <div className={classes.deliContent}>
+            <div className={classes.deliContentLeft}>
+              <div className={classes.leftContents}>
+                <div className={classes.imgWrap}>
+                  <img src={s1} className={classes.imgSize} />
+                </div>
+                <div>
+                  <p className={classes.firstText}>Nike</p>
+                  <p className={classes.secondText}>Nike SB Dunk Low Heineken</p>
+                  <p className={classes.thirdText}>나이키 SB 덩크 로우 하이네켄</p>
+                  <p className={classes.fourthText}>245 / 1개</p>
+                </div>
+              </div>
+            </div>
+            <div className={classes.deliContentRight}>
+              <div className={classes.priceBox}>
+                <p><span style={{color : '#ee1c25', fontWeight: '600', fontSize: '18px'}}>8,000,000</span> 원</p>
+              </div>
+              <div className={classes.priceBox2}>
+                <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>배송완료</p>
+                <div>
+                  <p style={{fontSize : '13px', color : '#666', marginBottom : '3px'}}>한진택배</p>
+                  <p style={{fontSize : '13px', fontWeight : '700', textDecoration : 'underline'}}>513419024160</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className={classes.line3}></div>
       </div>
     </MypageLayout>
   );

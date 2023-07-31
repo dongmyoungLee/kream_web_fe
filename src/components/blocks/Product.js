@@ -11,7 +11,7 @@ import bookmark from "../../asset/images/bookmark2.png";
 import cart from "../../asset/images/myhistory.png"
 const Product = (props) => {
   return (
-    <div className={classes.productWrap}>
+    <div className={classes.productWrap} onClick={props.onClick}>
       <div className={classes.imgWrap}>
         <img className={classes.imgSize} src={s1} />
       </div>

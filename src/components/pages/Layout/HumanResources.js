@@ -257,6 +257,10 @@ const HumanResources = () => {
     navigate('/member/profile');
   }
 
+  const goToDetails = () => {
+    navigate('/member/details');
+  }
+
   const userTopList = userTopListData.length !== 0 ? userTopListData.map((item, idx) => (
                                                     <div key={idx} className={classes.mainCard}>
                                                       <div className={classes.imgArea}>
@@ -346,13 +350,13 @@ const HumanResources = () => {
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
             </div>
           </section>
           <section className={classes.mainContents}>
