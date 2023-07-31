@@ -147,3 +147,30 @@
     display: flex;
     gap: 100px;
 }
+
+.reviewWrap {
+    display: flex;
+    gap: 25px;
+    padding-bottom: 40px;
+}
+
+.review {
+    width: calc(100% / 5 - 20px);
+    cursor: pointer;
+}
+
+.infoArea {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.reviewTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewLike {
+    display: flex;
+    gap: 5px;
+    color: rgba(34,34,34,.5);
+}

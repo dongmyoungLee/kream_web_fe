@@ -7,24 +7,36 @@ import reviewImg from "../../../asset/images/review.jpeg";
 import Button from "../../atoms/Button";
 import {useState} from "react";
 import QnaModal from "../../blocks/QnaModal";
+import ReviewModal from "../../blocks/ReviewModal";
+import Review from "../../blocks/Review";
 
 const Details = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [qnaTitle, setQnaTitle] = useState('');
-  const [qnaContent, setQnaContent] = useState('');
+  const [isReviewPopup, setIsReviewPopup] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const qnaHandler = () => {
-
-    const title = '정사이즈 인가요?';
-    const content = '네, 해당 상품은 정사이즈로 제작되었습니다.';
-
-    setQnaTitle(title);
-    setQnaContent(content);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const closeReviewModal = () => {
+    setIsReviewModalOpen(false);
+  };
+
+  const closeReviewPopup = () => {
+    setIsReviewPopup(false);
+  };
+
+  const reviewHandler = () => {
+    setIsReviewModalOpen(true);
+  }
+
+  const reviewPopup = () => {
+    setIsReviewPopup(true);
+  }
 
   return (
     <>
@@ -142,16 +154,119 @@ const Details = () => {
           </div>
         </div>
 
+        {isReviewModalOpen && (
+          <ReviewModal onClose={closeReviewModal} />
+        )}
 
         <div>
-          <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600', marginBottom : '25px'}}>리뷰 <span>109</span></h2>
-          <div>
-            <img style={{width : '250px', height : '250px'}} src={reviewImg} />
+          <div className={classes.qnaTitle}>
+            <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600'}}>리뷰</h2>
+            <Button btn={{
+              type : '',
+              value : '리뷰 작성',
+              width : '120px',
+              height: '40px',
+              onClick : reviewHandler
+            }} />
           </div>
-          <div className={classes.infoArea}>
-            <p>DM</p>
+
+          {isReviewPopup && (
+            <Review onClose={closeReviewPopup} />
+          )}
+
+          <div className={classes.reviewWrap}>
+            <div onClick={reviewPopup} className={classes.review}>
+              <div>
+                <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={reviewImg} />
+              </div>
+              <div className={classes.infoArea}>
+                <div className={classes.reviewTitle}>
+                  <p style={{color : 'rgba(34,34,34,.5)'}}>DM</p>
+                  <div className={classes.reviewLike}>
+                    <p>♡</p>
+                    <p>12</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding : '5px'}}>
+                <p>좋긴한데 너무 비싸다</p>
+              </div>
+            </div>
+
+            <div onClick={reviewPopup} className={classes.review}>
+              <div>
+                <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={reviewImg} />
+              </div>
+              <div className={classes.infoArea}>
+                <div className={classes.reviewTitle}>
+                  <p style={{color : 'rgba(34,34,34,.5)'}}>DM</p>
+                  <div className={classes.reviewLike}>
+                    <p>♡</p>
+                    <p>12</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding : '5px'}}>
+                <p>좋긴한데 너무 비싸다</p>
+              </div>
+            </div>
+
+            <div onClick={reviewPopup} className={classes.review}>
+              <div>
+                <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={reviewImg} />
+              </div>
+              <div className={classes.infoArea}>
+                <div className={classes.reviewTitle}>
+                  <p style={{color : 'rgba(34,34,34,.5)'}}>DM</p>
+                  <div className={classes.reviewLike}>
+                    <p>♡</p>
+                    <p>12</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding : '5px'}}>
+                <p>좋긴한데 너무 비싸다</p>
+              </div>
+            </div>
+
+            <div onClick={reviewPopup} className={classes.review}>
+              <div>
+                <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={reviewImg} />
+              </div>
+              <div className={classes.infoArea}>
+                <div className={classes.reviewTitle}>
+                  <p style={{color : 'rgba(34,34,34,.5)'}}>DM</p>
+                  <div className={classes.reviewLike}>
+                    <p>♡</p>
+                    <p>12</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding : '5px'}}>
+                <p>좋긴한데 너무 비싸다</p>
+              </div>
+            </div>
+
+            <div onClick={reviewPopup} className={classes.review}>
+              <div>
+                <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={reviewImg} />
+              </div>
+              <div className={classes.infoArea}>
+                <div className={classes.reviewTitle}>
+                  <p style={{color : 'rgba(34,34,34,.5)'}}>DM</p>
+                  <div className={classes.reviewLike}>
+                    <p>♡</p>
+                    <p>12</p>
+                  </div>
+                </div>
+              </div>
+              <div style={{padding : '5px'}}>
+                <p>좋긴한데 너무 비싸다</p>
+              </div>
+            </div>
 
           </div>
+
         </div>
       </Layout>
     </>
