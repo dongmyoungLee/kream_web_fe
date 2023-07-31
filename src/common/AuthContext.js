@@ -4,26 +4,13 @@ import {apiClient} from "./api/ApiClient";
 export const login = async (userId, userPwd) => {
 
   const res = {
-    isLogin : false,
-    token : null,
-    loginEnteredTime : Date.now(),
-    userId : null,
-    userName : null,
-    userPhone : null,
-    userBirth : null,
-    userAddr : null,
-    userJobEnterdYn : null,
-    userDesiredJobGroupCareer : null,
-    userDesiredJobGroup : null,
-    userDesiredJob : null,
-    userJobSkill : null,
-    userLastCompany : null,
-    userLastJobGroup : null,
-    userLastJobGroupCareer : null,
-    userLastSchoolName : null,
-    userLastSchoolStatus : null,
-    userLastSchoolDept : null,
-    userJobCareerYn : null,
+    loginInfo : {
+      isLogin : false,
+      address : null,
+      deliveries : null,
+      id : null,
+      username : null,
+    }
   }
 
   try {

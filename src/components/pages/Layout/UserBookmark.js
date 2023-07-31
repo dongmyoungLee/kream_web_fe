@@ -20,8 +20,9 @@ import userDefaultImg from "../../../asset/images/defaultuser.jpg";
 import bannerImg from "../../../asset/images/ai_compare_banner.webp";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import Product from "../../blocks/Product";
 
-const HumanResources = () => {
+const UserBookmark = () => {
   const [category, setCategory] = useState('Nike');
   const [filterJobList, setFilterJobList] = useState(humanResourcesDevJob);
   const [isDetailJobMenuShow, setIsDetailJobMenuShow] = useState(false);
@@ -61,17 +62,11 @@ const HumanResources = () => {
         })
 
       break;
-      case '기획' :
+      case 'Adidas' :
         setFilterJobList(humanResourcesPlannerJob);
       break;
-      case '마케팅' :
+      case 'New Balance' :
         setFilterJobList(humanResourcesMarketingJob);
-      break;
-      case '디자인' :
-        setFilterJobList(humanResourcesDesignJob);
-      break;
-      case '경영, 인사, 운영' :
-        setFilterJobList(humanResourcesEtcJob);
       break;
     }
 
@@ -87,47 +82,6 @@ const HumanResources = () => {
     setFilterBlock([]);
 
   }, [category])
-
-  useEffect(() => {
-    // 스크롤 이벤트 리스너 등록
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      // 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const handleScroll = () => {
-    // 스크롤 위치 계산
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    // 스크롤이 페이지 하단에 도달하면 추가 데이터 로드
-    if (scrollTop + windowHeight >= documentHeight) {
-      scrollLoadData(addMoreDataCount);
-    }
-  };
-
-  const scrollLoadData = (num) => {
-    // 새로운 데이터를 가져오는 비동기 요청 수행
-    // 예를 들어, API 호출 등
-    // 가져온 데이터를 기존 데이터와 결합하여 업데이트
-    userGet().then((res) => {
-      if (res.status === 200) {
-
-        const newData = res.data.data;
-        setUserBotListData(prevData => [...prevData, ...newData]);
-
-        setAddMoreDataCount(addMoreDataCount + 1);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-
-
-  };
 
   const detailMenuJobShow = () => {
     setIsDetailJobMenuShow(!isDetailJobMenuShow);
@@ -285,44 +239,52 @@ const HumanResources = () => {
   return (
       <>
         <Layout >
-          {(isLogin.isLogin && isLogin.userJobEnterdYn === 'N') && <WelcomeInfo onClick={profileUpdate} />}
+          {/*{(isLogin.isLogin && isLogin.userJobEnterdYn === 'N') && <WelcomeInfo onClick={profileUpdate} />}*/}
+
+          {/*<h2 style={{fontSize : '28px', color : '#141617', fontWeight : '700', marginTop : '20px'}}>내 관심정보</h2>*/}
           <CategorySection setCategory={setCategory} />
           <section className={classes.filterSection}>
-            <article className={classes.filterArticle}>
-              <FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="직무" count={selectJobCategoryCount}/>
+            {/*<article className={classes.filterArticle}>*/}
+            {/*  <FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="직무" count={selectJobCategoryCount}/>*/}
 
-              <FilterButton userMemoryFilter={userCareerFilter} onChange={checkBoxChangeCareerHandler} onClick={detailMenuCareerShow} left="92px" isDetailMenuShow={isDetailCareerMenuShow} menuHide={setIsDetailCareerMenuShow} menuList={careerFilterCategory} value="경력" count={selectCareerCategoryCount}/>
+            {/*  <FilterButton userMemoryFilter={userCareerFilter} onChange={checkBoxChangeCareerHandler} onClick={detailMenuCareerShow} left="92px" isDetailMenuShow={isDetailCareerMenuShow} menuHide={setIsDetailCareerMenuShow} menuList={careerFilterCategory} value="경력" count={selectCareerCategoryCount}/>*/}
 
-              <FilterButton userMemoryFilter={userRegionFilter} onChange={checkBoxChangeRegionHandler} onClick={detailMenuRegionShow} left="182px" isDetailMenuShow={isDetailRegionMenuShow} menuHide={setIsDetailRegionMenuShow} menuList={regionFilterCategory} value="지역" count={selectRegionCategoryCount}/>
-            </article>
+            {/*  <FilterButton userMemoryFilter={userRegionFilter} onChange={checkBoxChangeRegionHandler} onClick={detailMenuRegionShow} left="182px" isDetailMenuShow={isDetailRegionMenuShow} menuHide={setIsDetailRegionMenuShow} menuList={regionFilterCategory} value="지역" count={selectRegionCategoryCount}/>*/}
+            {/*</article>*/}
             <article>
               <FilteredItem item={filterBlock} onClick={filterRemoveBlock} />
             </article>
           </section>
           <section className={classes.mainContents}>
-            <div className={classes.mainCardWrap}>
-              {userTopList}
+            <div className={classes.mainCardWrap2}>
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
             </div>
           </section>
-          <section className={classes.bannerArea}>
-            <div className={classes.bannerAreaSection}>
-              <div className={classes.bannerTextArea}>
-                <h3 className={classes.bannerH3Option}>내 이력서는 어느 회사에 합격할 수 있을까 ?</h3>
-                <div className={classes.bannerBtn}>
-                  <p>ChatGPT 이력서 코칭 받기 ></p>
-                </div>
-              </div>
-              <img src={bannerImg} className={classes.bannerImg} />
-            </div>
-          </section>
-          <section className={classes.mainContents}>
-            <div className={classes.mainCardWrap}>
-              {userBotList}
-            </div>
-          </section>
+          {/*<section className={classes.bannerArea}>*/}
+          {/*  <div className={classes.bannerAreaSection}>*/}
+          {/*    <div className={classes.bannerTextArea}>*/}
+          {/*      <h3 className={classes.bannerH3Option}>내 이력서는 어느 회사에 합격할 수 있을까 ?</h3>*/}
+          {/*      <div className={classes.bannerBtn}>*/}
+          {/*        <p>ChatGPT 이력서 코칭 받기 ></p>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*    <img src={bannerImg} className={classes.bannerImg} />*/}
+          {/*  </div>*/}
+          {/*</section>*/}
+          {/*<section className={classes.mainContents}>*/}
+          {/*  <div className={classes.mainCardWrap}>*/}
+          {/*    {userBotList}*/}
+          {/*  </div>*/}
+          {/*</section>*/}
         </Layout>
       </>
   );
 }
 
-export default HumanResources;
+export default UserBookmark;

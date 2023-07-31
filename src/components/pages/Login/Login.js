@@ -12,6 +12,7 @@ import {loginCheckAction} from "../../../ducks/loginCheck";
 import PopupDom from "../../blocks/PopupDom";
 import MsgPopup from "../../blocks/MsgPopup";
 import {emailCheck, passCheck} from "../../../common/Reg";
+import {loginAction} from "../../../common/api/ApiPostService";
 
 const Login = () => {
   const [isLoginType, setIsLoginType] = useState('general');
@@ -42,8 +43,6 @@ const Login = () => {
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
 
-    // @@ isLoginType 분기하자 나중에..
-
     if (!emailCheck(idInput)) {
       setIsMsgPopupOpen({show: true, msg: '아이디를 형식에 맞게 입력해주세요.'});
       return ;
@@ -54,20 +53,32 @@ const Login = () => {
       return ;
     }
 
-
-    // login 인증함수..
-    const loginFn = await login(idInput, passInput)
-      .then((res) => {
-        if (res.isLogin) {
+    loginAction(idInput, passInput)
+      .then((res)=> {
+        if (res.data.id != null) {
           // 로그인 성공
           navigate('/employment/human-resources');
-          dispatch(loginCheckAction.loginInfoSet(res));
+          dispatch(loginCheckAction.loginInfoSet(res.data));
         } else {
           // 로그인 실패
           setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
         }
+      })
 
-      });
+
+    // login 인증함수..
+    // const loginFn = await login(idInput, passInput)
+    //   .then((res) => {
+    //     if (res.isLogin) {
+    //       // 로그인 성공
+    //       navigate('/employment/human-resources');
+    //       dispatch(loginCheckAction.loginInfoSet(res));
+    //     } else {
+    //       // 로그인 실패
+    //       setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
+    //     }
+    //
+    //   });
   }
 
   const closeMsgPopup = () => {
@@ -75,7 +86,7 @@ const Login = () => {
   }
 
 
-  const labelName = isLoginType === 'general' ? '아이디(이메일)' : '기업 아이디(이메일)';
+  const labelName = isLoginType === 'general' ? '아이디' : '기업 아이디(이메일)';
   const errorParam = '이메일과 비밀번호가 일치하지 않습니다.';
 
 
@@ -125,15 +136,19 @@ const Login = () => {
             <div className={classes.wrap}>
               <article className={classes.article}>
                 <div className={classes.formWrap}>
-                  <RadioGroup>
-                    <Radio name="contact" value="general" defaultChecked onChange={radioChangeHandler}>
-                      <p>일반회원</p>
-                    </Radio>
-                    <Radio name="contact" value="company" onChange={radioChangeHandler}>
-                      기업회원
-                    </Radio>
-                  </RadioGroup>
+                  {/*<RadioGroup>*/}
+                  {/*  <Radio name="contact" value="general" defaultChecked onChange={radioChangeHandler}>*/}
+                  {/*    <p>일반회원</p>*/}
+                  {/*  </Radio>*/}
+                  {/*  <Radio name="contact" value="company" onChange={radioChangeHandler}>*/}
+                  {/*    기업회원*/}
+                  {/*  </Radio>*/}
+                  {/*</RadioGroup>*/}
+                  {/*<img src="https://kream.co.kr/_nuxt/img/login_title.9f9ccc8.png">*/}
                   <div>
+                    <div style={{display: 'flex', justifyContent : 'center', marginBottom : '10px'}}>
+                      <img style={{height: '56px'}} src='https://kream.co.kr/_nuxt/img/login_title.9f9ccc8.png' />
+                    </div>
                     <div className={classes.formOption}>
                       {pcLoginForm}
                     </div>

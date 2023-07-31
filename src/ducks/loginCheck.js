@@ -3,26 +3,10 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialIsLoginState = {
   loginInfo : {
       isLogin : false,
-      token : null,
-      loginEnteredTime : null,
-      userId : null,
-      userName : null,
-      userPhone : null,
-      userBirth : null,
-      userAddr : null,
-      userJobEnterdYn : null,
-      userDesiredJobGroupCareer : null,
-      userDesiredJobGroup : null,
-      userDesiredJob : null,
-      userJobSkill : null,
-      userLastCompany : null,
-      userLastJobGroup : null,
-      userLastJobGroupCareer : null,
-      userLastSchoolName : null,
-      userLastSchoolStatus : null,
-      userLastSchoolDept : null,
-      userJobCareerYn : null
-
+      address : null,
+      deliveries : null,
+      id : null,
+      username : null,
   }
 }
 

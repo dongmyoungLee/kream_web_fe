@@ -1,9 +1,8 @@
 import Layout from "../../blocks/Layout";
-import WelcomeInfo from "../../blocks/WelcomeInfo";
 import CategorySection from "../../blocks/CategorySection";
 import classes from "../../../styles/pages/layout/humanResources.module.css";
 import FilterButton from "../../blocks/FilterButton";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {
   careerFilterCategory,
   humanResourcesDesignJob,
@@ -17,11 +16,14 @@ import FilteredItem from "../../blocks/FilteredItem";
 import {userGet} from "../../../common/api/ApiGetService";
 import {useSelector} from "react-redux";
 import userDefaultImg from "../../../asset/images/defaultuser.jpg";
-import bannerImg from "../../../asset/images/ai_compare_banner.webp";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import Product from "../../blocks/Product";
+import Swiper from "swiper";
+
 
 const HumanResources = () => {
-  const [category, setCategory] = useState('개발');
+  const [category, setCategory] = useState('Nike');
   const [filterJobList, setFilterJobList] = useState(humanResourcesDevJob);
   const [isDetailJobMenuShow, setIsDetailJobMenuShow] = useState(false);
   const [isDetailCareerMenuShow, setIsDetailCareerMenuShow] = useState(false);
@@ -40,16 +42,39 @@ const HumanResources = () => {
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
-
-
-
   useEffect(() => {
+    const swiperOptions = {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 3,
+        slideShadows: true
+      },
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true // 페이지네이션을 클릭 가능하도록 설정합니다.
+      },
+      slidesPerView: 1,
+      autoplay: {
+        delay: 1500,
+        disableOnInteraction: false
+      },
+      loopedSlides: 0,
+    }
+
+    const swiper = new Swiper(".swiper", swiperOptions);
+
     // 필터리스트 변경할용도..
     switch (category) {
-      case '개발' :
+      case 'Nike' :
         setFilterJobList(humanResourcesDevJob);
 
-        userGet().then((res) => {
+        axios.get('https://cozlin.com/api/v1/user').then((res) => {
           if (res.status === 200) {
             setUserTopListData(res.data.data.slice(0, 8));
             setUserBotListData(res.data.data.slice(8, 20));
@@ -284,39 +309,55 @@ const HumanResources = () => {
   return (
       <>
         <Layout >
-          {(isLogin.isLogin && isLogin.userJobEnterdYn === 'N') && <WelcomeInfo onClick={profileUpdate} />}
+          <div className="swiper">
+            <div className="swiper-wrapper">
+              <div className="swiper-slide swiper-slide--one">
+                <div style={{marginTop : '30px'}} className={classes.bannerArea}>
+                  <div className={classes.bannerAreaSection}>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide swiper-slide--one">
+                <div style={{marginTop : '30px'}} className={classes.bannerArea2}>
+                  <div className={classes.bannerAreaSection}>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-slide swiper-slide--one">
+                <div style={{marginTop : '30px'}} className={classes.bannerArea3}>
+                  <div className={classes.bannerAreaSection}>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+
           <CategorySection setCategory={setCategory} />
           <section className={classes.filterSection}>
             <article className={classes.filterArticle}>
-              <FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="직무" count={selectJobCategoryCount}/>
+              {/*<FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="카테고리" count={selectJobCategoryCount}/>*/}
 
-              <FilterButton userMemoryFilter={userCareerFilter} onChange={checkBoxChangeCareerHandler} onClick={detailMenuCareerShow} left="92px" isDetailMenuShow={isDetailCareerMenuShow} menuHide={setIsDetailCareerMenuShow} menuList={careerFilterCategory} value="경력" count={selectCareerCategoryCount}/>
+              <FilterButton userMemoryFilter={userCareerFilter} onChange={checkBoxChangeCareerHandler} onClick={detailMenuCareerShow} left="0px" isDetailMenuShow={isDetailCareerMenuShow} menuHide={setIsDetailCareerMenuShow} menuList={careerFilterCategory} value="사이즈" count={selectCareerCategoryCount}/>
 
-              <FilterButton userMemoryFilter={userRegionFilter} onChange={checkBoxChangeRegionHandler} onClick={detailMenuRegionShow} left="182px" isDetailMenuShow={isDetailRegionMenuShow} menuHide={setIsDetailRegionMenuShow} menuList={regionFilterCategory} value="지역" count={selectRegionCategoryCount}/>
+              <FilterButton userMemoryFilter={userRegionFilter} onChange={checkBoxChangeRegionHandler} onClick={detailMenuRegionShow} left="104px" isDetailMenuShow={isDetailRegionMenuShow} menuHide={setIsDetailRegionMenuShow} menuList={regionFilterCategory} value="색깔" count={selectRegionCategoryCount}/>
             </article>
             <article>
               <FilteredItem item={filterBlock} onClick={filterRemoveBlock} />
             </article>
           </section>
           <section className={classes.mainContents}>
-            <div className={classes.mainCardWrap}>
-              {userTopList}
-            </div>
-          </section>
-          <section className={classes.bannerArea}>
-            <div className={classes.bannerAreaSection}>
-              <div className={classes.bannerTextArea}>
-                <h3 className={classes.bannerH3Option}>내 이력서는 어느 회사에 합격할 수 있을까 ?</h3>
-                <div className={classes.bannerBtn}>
-                  <p>ChatGPT 이력서 코칭 받기 ></p>
-                </div>
-              </div>
-              <img src={bannerImg} className={classes.bannerImg} />
+            <div className={classes.mainCardWrap2}>
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
+              <Product />
             </div>
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap}>
-              {userBotList}
+
             </div>
           </section>
         </Layout>

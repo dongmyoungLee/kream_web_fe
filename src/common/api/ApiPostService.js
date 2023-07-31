@@ -16,13 +16,16 @@ export const findIdService = (userPhone) => apiClient.post('/api/v1/user/getUser
 })
 
 
-export const signUp = (id, pwd, phone, birthBefore, birthAfter , addr, name) => apiClient.post('/api/v1/user', {
-  userId: id,
-  userPassword: pwd,
-  userPhone: phone,
-  userBirth: `${birthBefore + birthAfter}`,
-  userAddr: addr,
-  userName: name,
+export const signUp = (id, pwd, addr, name) => apiClient.post('/api/v1/members/insert', {
+  id: id,
+  password: pwd,
+  address: addr,
+  username: name
+})
+
+export const loginAction = (id, password) => apiClient.post('/api/v1/members/login', {
+  id: id,
+  password : password
 })
 
 export const executeJwtAuthenticationTokenService = (username, password) => apiClient.post('/api/v1/authenticate', {username, password})

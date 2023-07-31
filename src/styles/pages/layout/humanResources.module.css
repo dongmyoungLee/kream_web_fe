@@ -292,6 +292,12 @@
     gap: 40px 20px;
 }
 
+.mainCardWrap2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
 .mainCard {
     width: calc(100% / 4 - 20px);
     display: flex;
@@ -348,16 +354,34 @@
 .bannerArea {
     cursor: pointer;
     padding-right: 20px;
+    background-image: url("../../../asset/images/banner.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 10px;
+}
+
+.bannerArea2 {
+    cursor: pointer;
+    padding-right: 20px;
+    background-image: url("../../../asset/images/banner2.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 10px;
+}
+
+.bannerArea3 {
+    cursor: pointer;
+    padding-right: 20px;
+    background-image: url("../../../asset/images/banner3.webp");
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 10px;
 }
 
 .bannerAreaSection {
-    height: 132px;
-    padding: 0px 48px;
+    height: 400px;
     border-radius: 12px;
-    background-color: rgba(0,98,223, 0.5);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    cursor: pointer;
 }
 
 .bannerImg {

@@ -11,20 +11,7 @@ import InputDivBox from "../../blocks/InputDivBox";
 
 
 const Profile = () => {
-  const isLogin = useSelector(state => {
-    const loginInfo = state.loginCheck.loginInfo;
-    return {
-      ...loginInfo,
-      // 필요한 경우 값을 복사하고 수정
-      userLastCompany: loginInfo.userLastCompany || "",
-      userLastJobGroup: loginInfo.userLastJobGroup || "",
-      userLastJobGroupCareer: loginInfo.userLastJobGroupCareer || "",
-      userLastSchoolDept: loginInfo.userLastSchoolDept || "",
-      userLastSchoolName: loginInfo.userLastSchoolName || "",
-      userLastSchoolStatus: loginInfo.userLastSchoolStatus || "",
-    };
-  });
-
+  const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
   const navigate = useNavigate();
 
@@ -74,7 +61,7 @@ const Profile = () => {
          <div className={classes.management_box}>
             <div className={classes.dark}>
                <h2 className={classes.h2_option}>프로필 관리</h2>
-               <p className={classes.p_option}>작성한 프로필로 입사지원을 할 수 있습니다.</p>
+               <p className={classes.p_option}>프로필 수정이 가능 합니다.</p>
             </div>
             <div>
 
@@ -85,27 +72,27 @@ const Profile = () => {
                   }} />
               </div>
             </div>
-         </div>        
+         </div>
          <div className={classes.line}></div>
-         <InputDivComponent  value={{first :isLogin.userName , second :isLogin.userPhone, third : isLogin.userId, fourth : ''}} label="기본 정보" inputTitle={{first : '이름', second : '연락처', third : '이메일', fourth : ''}} />
-         <div className={classes.line}></div>
-         <InputDivComponent value={{first :isLogin.userDesiredJobGroup, second :isLogin.userDesiredJob, third : isLogin.userDesiredJobGroupCareer, fourth :isLogin.userJobSkill}}
-         label="희망 직무" inputTitle={{first : '직군', second : '직무', third : '직무경력', fourth : '주요스킬'}} />
-         <div className={classes.line}></div>
+         <InputDivComponent  value={{first :isLogin.username , second :isLogin.address, third : isLogin.id, fourth : ''}} label="기본 정보" inputTitle={{first : '이름', second : '주소', third : '이메일', fourth : ''}} />
+         {/*<div className={classes.line}></div>*/}
+         {/*<InputDivComponent value={{first :isLogin.userDesiredJobGroup, second :isLogin.userDesiredJob, third : isLogin.userDesiredJobGroupCareer, fourth :isLogin.userJobSkill}}*/}
+         {/*label="희망 직무" inputTitle={{first : '직군', second : '직무', third : '직무경력', fourth : '주요스킬'}} />*/}
+         {/*<div className={classes.line}></div>*/}
         
         {/* userJobCareerYn 이 Y일때만 보여주는 최종경력 */}
-        {inputComponent_carrerYn}
+        {/*{inputComponent_carrerYn}*/}
 
-         <InputDivComponent value={{first :isLogin.userLastSchoolName, second :isLogin.userLastSchoolStatus, third :isLogin.userLastSchoolDept, fourth : ''}} label="최종 학력" inputTitle={{first : '학교명', second : '이수상태', third : '학과명', fourth : ''}} />
+         {/*<InputDivComponent value={{first :isLogin.userLastSchoolName, second :isLogin.userLastSchoolStatus, third :isLogin.userLastSchoolDept, fourth : ''}} label="최종 학력" inputTitle={{first : '학교명', second : '이수상태', third : '학과명', fourth : ''}} />*/}
 
-         <div className={classes.line}></div>
+         {/*<div className={classes.line}></div>*/}
          
-         <div className={classes.input_layout}>
-            <div>이력서</div>
-            <div> 
-               <InputDivBox type="file" />
-            </div>
-         </div>
+         {/*<div className={classes.input_layout}>*/}
+         {/*   <div>이력서</div>*/}
+         {/*   <div> */}
+         {/*      <InputDivBox type="file" />*/}
+         {/*   </div>*/}
+         {/*</div>*/}
       </div>
     </MypageLayout>
   );

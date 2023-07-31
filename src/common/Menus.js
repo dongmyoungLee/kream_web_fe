@@ -1,37 +1,45 @@
 import bookmark_img from '../asset/images/bookmark.png';
 import follow_img from '../asset/images/follow.png';
-import myHistory from '../asset/images/myhistory.png';
+import myHistory from '../asset/images/cart.png';
+import myHistory2 from '../asset/images/myhistory.png';
 import myProfile from '../asset/images/myprofile.png';
 import myAccount from '../asset/images/myaccount.png';
 
 
+
 export const headerMenu = [
     {
-      menuName : '인채 채용',
+      menuName : 'Shoes',
       menuLink : '/employment/human-resources'
-    },
-    {
-      menuName : '채용 공고',
-      menuLink : '/employment/announcement'
-    },
-    {
-      menuName : '이미지 리사이즈',
-      menuLink : '/employment/resize'
-    },
+    }
+    // {
+    //   menuName : '남성',
+    //   menuLink : '/employment/announcement'
+    // },
+    // {
+    //   menuName : '여성',
+    //   menuLink : '/employment/resize'
+    // },
 ];
 
 export const mypageFavMenu = [
   {
-    menuName : '북마크 모아보기',
+    menuName : '내 관심정보',
     imgPath : bookmark_img,
     clickFlag : 'bookmark',
     path : '/member/bookmark',
   },
   {
-    menuName : '팔로우 모아보기',
+    menuName : '배송 정보',
     imgPath : follow_img,
     clickFlag : 'follow',
     path : '/member/follow',
+  },
+  {
+    menuName : '주문 내역',
+    imgPath : myHistory2,
+    clickFlag : 'order',
+    path : '/member/order',
   },
 ]
 
@@ -39,7 +47,7 @@ export const mypageFavMenu = [
 export const mypageTooltipMenu = [
 
     {
-      menuName : '지원 현황',
+      menuName : '장바구니',
       imgPath : myHistory,
       clickFlag : 'history',
       path : '/member/history',
@@ -58,125 +66,106 @@ export const mypageTooltipMenu = [
     },
 ];
 
+export const mypageTooltipMenu2 = [
+
+  {
+    menuName : '내 관심정보',
+    imgPath : bookmark_img,
+    clickFlag : 'bookmark',
+    path : '/member/bookmark',
+  },
+  {
+    menuName : '배송정보',
+    imgPath : myProfile,
+    clickFlag: 'follow',
+    path : '/member/follow',
+  },
+  {
+    menuName : '주문 내역',
+    imgPath : myHistory2,
+    clickFlag : 'order',
+    path : '/member/order',
+  },
+];
+
 export const careerFilterCategory = [
   {
-    menuName : '신입'
+    menuName : '240'
   },
   {
-    menuName : '1~3년'
+    menuName : '245'
   },
   {
-    menuName : '4~6년'
+    menuName : '250'
   },
   {
-    menuName : '7년 이상'
+    menuName : '255'
   },
+  {
+    menuName : '260'
+  },
+  {
+    menuName : '265'
+  },
+  {
+    menuName : '270'
+  }
 ];
 
 export const regionFilterCategory = [
   {
-    menuName : '서울'
+    menuName : '빨강'
   },
   {
-    menuName : '판교'
+    menuName : '주황'
   },
   {
-    menuName : '경기'
+    menuName : '노랑'
   },
   {
-    menuName : '인천'
+    menuName : '초록'
   },
   {
-    menuName : '강원'
+    menuName : '파랑'
   },
   {
-    menuName : '대전'
+    menuName : '남색'
   },
   {
-    menuName : '세종'
+    menuName : '보라'
   },
-  {
-    menuName : '충청'
-  },
-  {
-    menuName : '광주'
-  },
-  {
-    menuName : '전라'
-  },
-  {
-    menuName : '부산'
-  },
-  {
-    menuName : '대구'
-  },
-  {
-    menuName : '울산'
-  },
-  {
-    menuName : '경상'
-  },
-  {
-    menuName : '제주'
-  },
-
-
 ];
 
 export const humanResourcesCategory = [
   {
-    menuName : '개발'
+    menuName : 'Nike'
   },
   {
-    menuName : '기획'
+    menuName : 'Adidas'
   },
   {
-    menuName : '마케팅'
-  },
-  {
-    menuName : '디자인'
-  },
-  {
-    menuName : '경영, 인사, 운영'
+    menuName : 'New Balance'
   }
 ];
 
 export const humanResourcesDevJob = [
   {
-    menuName : '프론트엔드 개발자'
+    menuName : '최근 30일 발매'
   },
   {
-    menuName : '서버/백엔드 개발자'
+    menuName : '신상품 순'
   },
   {
-    menuName : '웹 풀스택 개발자'
+    menuName : '신상품 순'
   },
   {
-    menuName : '앱 개발자'
+    menuName : '신상품 순'
   },
   {
-    menuName : '머신러닝/인공지능 개발자'
+    menuName : '신상품 순'
   },
   {
-    menuName : '데이터 엔지니어'
-  },
-  {
-    menuName : '게임 개발자'
-  },
-  {
-    menuName : 'DevOps 엔지니어'
-  },
-  {
-    menuName : 'SW/솔루션 엔지니어'
-  },
-  {
-    menuName : '정보보안 엔지니어'
-  },
-  {
-    menuName : 'QA 엔지니어'
-  },
-  {
-    menuName : '기타'
+    menuName : '신상품 순'
   },
 ];
 

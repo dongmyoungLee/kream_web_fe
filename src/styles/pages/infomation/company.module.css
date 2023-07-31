@@ -1,8 +1,6 @@
 .mainArea {
-    background: rgb(110, 80, 255);
     display: flex;
     justify-content: center;
-    padding-top: 72px;
 }
 
 .centerArea {
@@ -40,9 +38,8 @@
     font-weight: 700;
 }
 
-.secondSection{
-    padding: 96px 0px;
-    background-color: rgb(3, 29, 68);
+.secondSection2{
+    padding-bottom: 20px;
 }
 
 .imgWrap {
@@ -51,12 +48,19 @@
     gap: 74px;
 }
 
+.imgWrap2 {
+    display: flex;
+    justify-content: center;
+    gap: 74px;
+    background: rgb(237, 255, 29);
+}
+
 .imgOption {
-    height: 222px;
+    height: 950px;
 }
 
 .firstImg {
-    height: 100%;
+    width: 100%;
 }
 
 .textWrap {

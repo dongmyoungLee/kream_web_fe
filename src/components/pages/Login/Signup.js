@@ -119,27 +119,12 @@ const Login = () => {
       return ;
     }
 
-    if(!numberCheck(phoneInput)) {
-      setIsMsgPopupOpen({show: true, msg: '연락처를 숫자 형식으로 입력 해주세요.'});
-      return ;
-    }
-
-    if(!numberCheck(birthBeforeInput)) {
-      setIsMsgPopupOpen({show: true, msg: '주민번호를 숫자 형식으로 입력 해주세요.'});
-      return ;
-    }
-
-    if(birthAfterInput === '') {
-      setIsMsgPopupOpen({show: true, msg: '주민번호를 숫자 형식으로 입력 해주세요.'});
-      return ;
-    }
-
     // if(idValidBtnText !== '완료') {
     //   setIsMsgPopupOpen({show: true, msg: '이메일 인증을 완료 해주세요.'});
     //   return ;
     // }
 
-    signUp(idInput, passInput, phoneInput, birthBeforeInput, birthAfterInput, (userPostData + ' ' +  userAddrDetail), nameInput)
+    signUp(idInput, passInput,(userPostData + ' ' +  userAddrDetail), nameInput)
     .then((res) => {
       if (res.status === 200) {
         setAfterVisitPath('/member/login');
@@ -147,6 +132,7 @@ const Login = () => {
       }
     })
     .catch((error) => {
+      debugger
       setIsMsgPopupOpen({show: true, msg: error.response.data.message === undefined ? '데이터베이스 오류 입니다. 관리자에게 문의하세요.' : error.response.data.message });
     })
   }
@@ -214,8 +200,9 @@ const Login = () => {
 
 
   const pcLoginForm = <form className={classes2.signupGeneralForm}>
+
                         <div className={classes2.flexOption}>
-                          <Input label='아이디(이메일)' onBlur={idBlur} onChange={idInputHandler} input={{
+                          <Input label='아이디' onBlur={idBlur} onChange={idInputHandler} input={{
                             type : 'text',
                             placeholder : 'example@email.com',
                             width : idInputWidth,
@@ -229,6 +216,7 @@ const Login = () => {
                           placeholder : '********',
                           name: 'userPassword'
                         }} />
+
                         <Input label='비밀번호 확인' onChange={passCheckInputHandler} input={{
                           type : 'password',
                           placeholder : '********',
@@ -240,35 +228,6 @@ const Login = () => {
                           name: 'userName',
                           maxLength: 10,
                         }} />
-
-                        <div className={classes2.flexOption}>
-                          <Input label='연락처' onBlur={phoneBlur} onChange={phoneInputHandler}  input={{
-                            type : 'text',
-                            placeholder : '"-(하이픈)" 을 빼고 입력 해주세요.',
-                            width : phoneInputWidth,
-                            name: 'userPhone',
-                            maxLength: 13,
-                          }} />
-                          {/*<button tabIndex='-1' style={{display : isPhoneBtnShow ? 'block' : 'none', transition : '0.5s'}} className={classes2.buttonOption}>인증</button>*/}
-                        </div>
-
-                        <div className={classes2.flexOption}>
-                          <Input label='주민번호 (7자리)' onChange={birthBeforeInputHandler} input={{
-                            type : 'text',
-                            placeholder : '000000',
-                            name: 'userBirth',
-                            width: '48%',
-                            maxLength: 6
-                          }} />
-                          <p className={classes2.lineHeight}>-</p>
-                          <Input onChange={birthAfterInputHandler} input={{
-                            type : 'text',
-                            placeholder : '0******',
-                            name: 'userBirth',
-                            width: '48%',
-                            maxLength: 1,
-                          }} />
-                        </div>
 
                         <Input label='주소' onClick={openPostCode} input={{
                           type : 'text',
@@ -316,31 +275,7 @@ const Login = () => {
                               name: 'userName',
                               maxLength: 10,
                             }} />
-                            <div className={classes2.flexOption}>
-                              <Input label='주민번호 (7자리)' onChange={birthBeforeInputHandler} input={{
-                                type : 'text',
-                                placeholder : '000000',
-                                name: 'userBirth',
-                                width: '48%',
-                                maxLength: 6
-                              }} />
-                              <p className={classes2.lineHeight}>-</p>
-                              <Input onChange={birthAfterInputHandler} input={{
-                                type : 'text',
-                                placeholder : '0******',
-                                name: 'userBirth',
-                                width: '48%',
-                                maxLength : 1
-                              }} />
-                            </div>
-                            <div className={classes2.flexOption}>
-                              <Input label='연락처' onBlur={phoneBlur} onChange={phoneInputHandler}  input={{
-                                type : 'text',
-                                placeholder : '010-1234-5678',
-                                width : phoneInputWidth,
-                              }} />
-                              {/*<button tabIndex='-1' style={{display : isPhoneBtnShow ? 'block' : 'none', transition : '0.5s'}} className={classes2.buttonOption}>인증</button>*/}
-                            </div>
+
                             <Input label='주소' onClick={openPostCode} input={{
                               type : 'text',
                               readOnly : 'readonly',
@@ -366,6 +301,9 @@ const Login = () => {
               <article className={classes.signup_article}>
                 <div className={classes2.formWrap}>
                   <div>
+                    <div style={{display: 'flex', justifyContent : 'center', marginBottom : '10px'}}>
+                      <img style={{height: '56px'}} src='https://kream.co.kr/_nuxt/img/login_title.9f9ccc8.png' />
+                    </div>
                     <div className={classes.formOption}>
                       {pcLoginForm}
                     </div>

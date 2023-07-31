@@ -5,7 +5,7 @@ import {humanResourcesCategory} from "../../common/Menus";
 import {useEffect, useRef, useState} from "react";
 
 const CategorySection = (props) => {
-  const [selectedCategory, setSelectedCategory] = useState('개발');
+  const [selectedCategory, setSelectedCategory] = useState('Nike');
   const [isDetailMenuShow, setIsDetailMenuShow] = useState(false);
   const myMenuRef = useRef(null);
   const myMenuRef2 = useRef(null);
@@ -62,7 +62,7 @@ const CategorySection = (props) => {
         <article className={classes.searchCategory}>
           <form className={classes.formStyle}>
             <img src={search} className={classes.imgOption} />
-            <input className={classes.inputOption} type="search" placeholder="경력, 기술 스택 검색" />
+            <input className={classes.inputOption} type="search" placeholder="이름 검색" />
             <button className="btnClear"></button>
           </form>
         </article>

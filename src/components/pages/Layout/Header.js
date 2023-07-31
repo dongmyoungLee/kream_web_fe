@@ -40,10 +40,10 @@ const Header = () => {
 
   const notLoginMenu = <div className={classes.flexItem}>
                         <Link className={classes.loginText} to='/member/login'>로그인 / 회원가입</Link>
-                        <div className={classes.verticalSpace}></div>
-                        <div className={classes.categoryBoxCss} onClick={pageNavigationHandler}>
-                          {userType}
-                        </div>
+                        {/*<div className={classes.verticalSpace}></div>*/}
+                        {/*<div className={classes.categoryBoxCss} onClick={pageNavigationHandler}>*/}
+                        {/*  {userType}*/}
+                        {/*</div>*/}
                       </div>;
 
   const loginedMenu = <div ref={myMenuRef2}><img className={classes.mypageLogo} src={mypageIcon} onClick={mypageMenuShow} alt='loginMenu' /></div>

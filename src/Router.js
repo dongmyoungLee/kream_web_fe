@@ -9,11 +9,12 @@ import Resize from "./components/pages/Layout/Resize";
 import FindUserInfo from "./components/pages/Login/FindUserInfo";
 import Account from "./components/pages/Infomation/Account";
 import History from "./components/pages/Infomation/History";
-import Bookmark from "./components/pages/Infomation/Bookmark";
 import Follow from "./components/pages/Infomation/Follow";
 import Profile from "./components/pages/Infomation/Profile";
 import HeaderSection from "./components/pages/Layout/HeaderSection";
 import ProfileUpdate from './components/pages/Infomation/ProfileUpdate';
+import UserBookmark from "./components/pages/Layout/UserBookmark";
+import Order from "./components/pages/Infomation/Order";
 
 const router = createBrowserRouter([
   {
@@ -54,12 +55,16 @@ const router = createBrowserRouter([
       },
       {
         path : 'bookmark',
-        element: <Bookmark />
+        element: <UserBookmark />
       },
       {
         path : 'follow',
         element: <Follow />
+      },{
+        path : 'order',
+        element: <Order />
       },
+
     ]
   },
   {

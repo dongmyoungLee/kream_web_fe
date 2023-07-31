@@ -73,9 +73,9 @@ const MobileMenu = (props) => {
                     <MobileMenuList key={item.menuName} endPoint={item.menuLink} onClick={props.onClick} menuName={item.menuName} />
                 ))}
             </section>
-            <section className={classes.section}>
-                <MobileMenuList endPoint='/' menuName='기업 서비스' onClick={props.onClick} />
-            </section>
+            {/*<section className={classes.section}>*/}
+            {/*    <MobileMenuList endPoint='/' menuName='기업 서비스' onClick={props.onClick} />*/}
+            {/*</section>*/}
             {!isLogin && notLoginMenu}
             {isLogin && loginMenu}
         </main>

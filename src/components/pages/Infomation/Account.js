@@ -141,14 +141,21 @@ const Account = (props) => {
                 <h2 className={classes.h2_option}>계정 정보</h2>
                 <p  className={classes.p_option}>로그인 정보를 변경할 수 있습니다.</p>
               </div>
-
             </div>
             <div className={classes.line}></div>
             <div className={classes.account_information}>
                <div className={classes.id_box}>
                  <div className={classes.id}>아이디</div>
-                 <div className={classes.input_name}>{isLogin.userId}</div>
+                 <div className={classes.input_name}>{isLogin.id}</div>
                </div>
+              <div className={classes.id_box}>
+                <div className={classes.id}>포인트</div>
+                <div className={classes.input_name}>12,230</div>
+              </div>
+              <div className={classes.id_box}>
+                <div className={classes.id}>등급</div>
+                <div className={classes.input_name}>1등급</div>
+              </div>
             </div>
             <div className={classes.line}></div>
             <InputComponent onChange={{first : currPwdHandler, second : changePwdHandler, third : changeCheckPwdHandler}} placeholder={{first : "********", second : "********", third : "********", fourth :''}} use="isNotReadOnly" type="password" label="비밀번호" inputTitle={{first : '현재 비밀번호', second : '변경할 비밀번호', third : '비밀번호 확인', fourth : ''}}  />
