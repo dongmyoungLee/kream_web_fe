@@ -13,6 +13,7 @@ import PopupDom from "../../blocks/PopupDom";
 import MsgPopup from "../../blocks/MsgPopup";
 import { useNavigate } from "react-router-dom";
 import { loginCheckAction } from "../../../ducks/loginCheck";
+import InputBox from "../../blocks/InputBox";
 
 const Account = (props) => {
   const [currentPwd, setCurrentPwd] = useState("");
@@ -150,19 +151,48 @@ const Account = (props) => {
                </div>
               <div className={classes.id_box}>
                 <div className={classes.id}>포인트</div>
-                <div className={classes.input_name}>12,230</div>
+                <div style={{marginRight : '15px'}} className={classes.input_name}>12,230</div>
               </div>
               <div className={classes.id_box}>
                 <div className={classes.id}>등급</div>
                 <div className={classes.input_name}>1등급</div>
               </div>
             </div>
+
+            <div className={classes.line}></div>
+            <div className={classes.input_layout}>
+              <div>포인트 충전</div>
+              <InputBox onChange={currPwdHandler} type="text" inputTitle="충전할 포인트"  placeholder="1,000,000" />
+            </div>
+
+            <div style={{display : 'flex', justifyContent : 'flex-end', paddingRight : '30px'}}>
+              <div style={{width:'137px'}}>
+                <Button btn={{value:'충전하기', onClick:changePwdSubmit}}/>
+              </div>
+            </div>
+
+
             <div className={classes.line}></div>
             <InputComponent onChange={{first : currPwdHandler, second : changePwdHandler, third : changeCheckPwdHandler}} placeholder={{first : "********", second : "********", third : "********", fourth :''}} use="isNotReadOnly" type="password" label="비밀번호" inputTitle={{first : '현재 비밀번호', second : '변경할 비밀번호', third : '비밀번호 확인', fourth : ''}}  />
 
             <div style={{display : 'flex', justifyContent : 'flex-end', paddingRight : '30px'}}>
               <div style={{width:'137px'}}>
                 <Button btn={{value:'수정하기', onClick:changePwdSubmit}}/>
+              </div>
+            </div>
+
+            <div className={classes.line}></div>
+            <div className={classes.input_layout}>
+              <div>로그인 히스토리</div>
+              <div>
+                <div style={{display: 'flex', gap : '15px', width : '250px', marginBottom : '10px', backgroundColor : '#eee', padding: '10px', borderRadius : '5px'}}>
+                  <div style={{width : '50%', textAlign : 'center'}}>로그인 시간</div>
+                  <div style={{width : '50%', textAlign : 'center'}}>로그인 성공 여부</div>
+                </div>
+                <div style={{display: 'flex', gap : '15px', width : '250px'}}>
+                  <div style={{width : '50%', textAlign : 'center'}}>23/07/31</div>
+                  <div style={{width : '50%', textAlign : 'center'}}>성공</div>
+                </div>
               </div>
             </div>
           </div>

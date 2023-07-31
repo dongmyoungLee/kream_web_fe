@@ -2,8 +2,30 @@ import Layout from "../../blocks/Layout";
 import classes from "../../../styles/pages/infomation/details.module.css";
 import d1 from "../../../asset/images/d1.webp";
 import bookmark from "../../../asset/images/bookmark2.png";
+import cart from "../../../asset/images/cart.png";
+import reviewImg from "../../../asset/images/review.jpeg";
+import Button from "../../atoms/Button";
+import {useState} from "react";
+import QnaModal from "../../blocks/QnaModal";
 
 const Details = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [qnaTitle, setQnaTitle] = useState('');
+  const [qnaContent, setQnaContent] = useState('');
+  const qnaHandler = () => {
+
+    const title = '정사이즈 인가요?';
+    const content = '네, 해당 상품은 정사이즈로 제작되었습니다.';
+
+    setQnaTitle(title);
+    setQnaContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Layout>
@@ -38,7 +60,13 @@ const Details = () => {
               <div className={classes.bookmarkArea}>
                 <img style={{height : '25px'}} src={bookmark} />
                 <p>관심상품</p>
-                <p style={{fontWeight : '600'}}>9,483</p>
+                <p style={{fontWeight : '600'}}>9,483 <span style={{color: 'rgba(34,34,34,.5)', fontSize : '14px'}}>명이 관심을 보이고 있어요.</span></p>
+              </div>
+
+              <div className={classes.bookmarkArea}>
+                <img style={{height : '25px'}} src={cart} />
+                <p>장바구니</p>
+                <p style={{fontWeight : '600'}}>1,202 <span style={{color: 'rgba(34,34,34,.5)', fontSize : '14px'}}>명이 장바구니에 추가 했어요.</span></p>
               </div>
 
               <div className={classes.productInfo}>
@@ -63,8 +91,66 @@ const Details = () => {
 
                 </div>
               </div>
-
             </div>
+          </div>
+        </div>
+        <div className={classes.qna}>
+          <div className={classes.qnaTitle}>
+            <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600'}}>상품 Q&A</h2>
+            <Button btn={{
+              type : '',
+              value : 'Q&A 작성',
+              width : '120px',
+              height: '40px',
+              onClick : qnaHandler
+            }} />
+          </div>
+
+          {isModalOpen && (
+            <QnaModal onClose={closeModal} />
+          )}
+
+          <div className={classes.question}>
+            <p style={{fontWeight : '600', cursor: 'pointer'}}>정사이즈 인가요 ?</p>
+
+            <div className={classes.innerQuestion}>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>pajang1515@daum.net</p>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>2023.08.01</p>
+              <p>미답변</p>
+              <p style={{fontWeight : '600', textDecoration : 'underline', cursor :'pointer'}}>답변하기</p>
+            </div>
+          </div>
+          <div className={classes.question}>
+            <p style={{fontWeight : '600', cursor: 'pointer'}}>정사이즈 인가요 ?</p>
+
+            <div className={classes.innerQuestion}>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>pajang1515@daum.net</p>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>2023.08.01</p>
+              <p>미답변</p>
+              <p style={{fontWeight : '600', textDecoration : 'underline', cursor :'pointer'}}>답변하기</p>
+            </div>
+          </div>
+          <div className={classes.question}>
+            <p style={{fontWeight : '600', cursor: 'pointer'}}>정사이즈 인가요 ?</p>
+
+            <div className={classes.innerQuestion}>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>pajang1515@daum.net</p>
+              <p style={{color : 'rgba(34, 34, 34, 0.5)'}}>2023.08.01</p>
+              <p>미답변</p>
+              <p style={{fontWeight : '600', textDecoration : 'underline', cursor :'pointer'}}>답변하기</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div>
+          <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600', marginBottom : '25px'}}>리뷰 <span>109</span></h2>
+          <div>
+            <img style={{width : '250px', height : '250px'}} src={reviewImg} />
+          </div>
+          <div className={classes.infoArea}>
+            <p>DM</p>
+
           </div>
         </div>
       </Layout>
