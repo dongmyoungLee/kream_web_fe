@@ -119,10 +119,10 @@ const Login = () => {
       return ;
     }
 
-    // if(idValidBtnText !== '완료') {
-    //   setIsMsgPopupOpen({show: true, msg: '이메일 인증을 완료 해주세요.'});
-    //   return ;
-    // }
+    if(idValidBtnText !== '완료') {
+      setIsMsgPopupOpen({show: true, msg: '이메일 인증을 완료 해주세요.'});
+      return ;
+    }
 
     signUp(idInput, passInput,(userPostData + ' ' +  userAddrDetail), nameInput)
     .then((res) => {
@@ -163,10 +163,11 @@ const Login = () => {
       return ;
     }
 
-    emailValidService(idInput, 'signup')
+    emailValidService(idInput)
     .then((res) => {
+      debugger
       if (res.status === 200) {
-        setUserMailCode(res.data.data);
+        setUserMailCode(res.data);
         setIsMailValidPopupOpen({show: true, msg: '인증메일이 발송되었습니다.'});
       }
     })

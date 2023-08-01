@@ -1,9 +1,8 @@
 import {apiClient} from "./ApiClient";
 
 
-export const emailValidService = (userId, flag) => apiClient.post('/api/v1/mail/confirm', {
-  email: userId,
-  flag: flag,
+export const emailValidService = (userId) => apiClient.post(`/api/v1/mail/${userId}`, {
+  email: userId
 })
 
 export const findPwdService = (userId, flag) => apiClient.post('/api/v1/user/updatePw', {
