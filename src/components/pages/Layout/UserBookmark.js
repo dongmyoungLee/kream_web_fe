@@ -1,23 +1,11 @@
 import Layout from "../../blocks/Layout";
-import WelcomeInfo from "../../blocks/WelcomeInfo";
 import CategorySection from "../../blocks/CategorySection";
 import classes from "../../../styles/pages/layout/humanResources.module.css";
-import FilterButton from "../../blocks/FilterButton";
 import {useEffect, useState} from "react";
-import {
-  careerFilterCategory,
-  humanResourcesDesignJob,
-  humanResourcesDevJob,
-  humanResourcesEtcJob,
-  humanResourcesMarketingJob,
-  humanResourcesPlannerJob,
-  regionFilterCategory
-} from "../../../common/Menus";
+import {humanResourcesDevJob, humanResourcesMarketingJob, humanResourcesPlannerJob} from "../../../common/Menus";
 import FilteredItem from "../../blocks/FilteredItem";
-import {userGet} from "../../../common/api/ApiGetService";
 import {useSelector} from "react-redux";
 import userDefaultImg from "../../../asset/images/defaultuser.jpg";
-import bannerImg from "../../../asset/images/ai_compare_banner.webp";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Product from "../../blocks/Product";
@@ -235,6 +223,9 @@ const UserBookmark = () => {
     ))
     : <p>조회되는 데이터가 없습니다.</p>;
 
+  const goToDetails = () => {
+    navigate('/member/details');
+  }
 
   return (
       <>
@@ -257,13 +248,13 @@ const UserBookmark = () => {
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-              <Product />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
+              <Product onClick={goToDetails} />
             </div>
           </section>
           {/*<section className={classes.bannerArea}>*/}

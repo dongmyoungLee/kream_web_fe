@@ -111,8 +111,8 @@ const Details = () => {
             <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600'}}>상품 Q&A</h2>
             <Button btn={{
               type : '',
-              value : 'Q&A 작성',
-              width : '120px',
+              value : '작성',
+              width : '80px',
               height: '40px',
               onClick : qnaHandler
             }} />
@@ -163,8 +163,8 @@ const Details = () => {
             <h2 style={{fontSize : '20px', color : '#222', fontWeight : '600'}}>리뷰</h2>
             <Button btn={{
               type : '',
-              value : '리뷰 작성',
-              width : '120px',
+              value : '작성',
+              width : '80px',
               height: '40px',
               onClick : reviewHandler
             }} />
