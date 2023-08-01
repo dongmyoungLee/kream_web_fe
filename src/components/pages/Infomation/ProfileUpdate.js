@@ -5,19 +5,13 @@ import Button from "../../atoms/Button";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {
-  humanResourcesCareer,
-  humanResourcesCategory,
   humanResourcesDesignJob,
   humanResourcesDevJob,
   humanResourcesEtcJob,
   humanResourcesMarketingJob,
-  humanResourcesPlannerJob,
-  humanResourcesSchoolStatus
+  humanResourcesPlannerJob
 } from "../../../common/Menus";
-import InputUpdateBox from "../../blocks/InputUpdateBox";
-import InputSkillBox from "../../blocks/InputSkillBox";
 import InputUpdateInputBox from "../../blocks/InputUpdateInputBox";
-import {fileUpload, updateUserJobProfile} from "../../../common/api/ApiPostService";
 import PopupDom from "../../blocks/PopupDom";
 import MsgPopup from "../../blocks/MsgPopup";
 import {loginCheckAction} from "../../../ducks/loginCheck";
@@ -130,6 +124,14 @@ const ProfileUpdate = () => {
   const saveUserProfile = (e) => {
 
     // 수정하기 로직 필요..
+    axios.put(`http://localhost:8080/api/v1/members/update/${userId}`, {
+      username : userName,
+      address : userAddr,
+    }).then((res) => {
+      setIsMsgPopupOpen({show: true, msg: res.data.data});
+    }).catch((err) => {
+      setIsMsgPopupOpen({show: true, msg: err.message});
+    })
 
   }
 
@@ -139,25 +141,10 @@ const ProfileUpdate = () => {
   const closeMsgPopup = () => {
     const res = {
       isLogin : false,
-      token : null,
-      loginEnteredTime : Date.now(),
-      userId : null,
-      userName : null,
-      userPhone : null,
-      userBirth : null,
-      userAddr : null,
-      userJobEnterdYn : null,
-      userDesiredJobGroupCareer : null,
-      userDesiredJobGroup : null,
-      userDesiredJob : null,
-      userJobSkill : null,
-      userLastCompany : null,
-      userLastJobGroup : null,
-      userLastJobGroupCareer : null,
-      userLastSchoolName : null,
-      userLastSchoolStatus : null,
-      userLastSchoolDept : null,
-      userJobCareerYn : null
+      address : null,
+      deliveries : null,
+      id : null,
+      username : null
     }
 
     dispatch(loginCheckAction.logout(res));
@@ -219,9 +206,9 @@ const ProfileUpdate = () => {
                {/*  </div>*/}
                {/*</div>*/}
                <div className={classes.careerSection}>
-                 <InputUpdateInputBox value={userName} onChange={companyNameHandler} label="이름" />
-                 <InputUpdateInputBox value={userAddr} onChange={careerJonHandler} label="주소" />
-                 <InputUpdateInputBox value={userId} onChange={careerYearHandler} label="이메일" />
+                 <InputUpdateInputBox disabled={false} value={userName} onChange={companyNameHandler} label="이름" />
+                 <InputUpdateInputBox disabled={false} value={userAddr} onChange={careerJonHandler} label="주소" />
+                 <InputUpdateInputBox disabled={true} value={userId} onChange={careerYearHandler} label="이메일" />
                </div>
              </div>
            </div>

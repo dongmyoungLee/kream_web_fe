@@ -9,7 +9,7 @@ const
         <p>{props.label}</p>
       </div>
       <div className={classes.btnSection2}>
-        <input value={props.value} onChange={props.onChange} placeholder={props.placeholder} className={classes.inputSection} />
+        <input disabled={props.disabled} value={props.value} onChange={props.onChange} placeholder={props.placeholder} className={classes.inputSection} />
       </div>
     </div>
   );
