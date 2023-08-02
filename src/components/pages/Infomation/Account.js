@@ -17,11 +17,14 @@ import InputBox from "../../blocks/InputBox";
 
 const Account = (props) => {
   const [currentPwd, setCurrentPwd] = useState("");
+  const [chargeData, setChargeData] = useState(0);
   const [changePwd,  setChangePwd] = useState("");
   const [changeCheckPwd, setChangeCheckPwd] = useState("");
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
   const [userGrade, setUserGrade] = useState('');
   const [userPoint, setUserPoint] = useState(0);
+  const [observer, setObserver] = useState(false);
+  const [userHistory, setUserHistory] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
@@ -36,10 +39,23 @@ const Account = (props) => {
     .catch((err) => {
 
     })
-  }, []);
+
+    axios.get(`http://localhost:8080/api/v1/members/history/${isLogin.memberSeq}`)
+      .then((res) => {
+        setUserHistory(res.data);
+      })
+      .catch((err) => {
+
+      })
+
+  }, [observer]);
   
   const currPwdHandler = (e) => {
     setCurrentPwd(e.target.value);
+  }
+
+  const chargePwdHandler = (e) => {
+    setChargeData(e.target.value);
   }
 
   const changePwdHandler = (e) => {
@@ -67,9 +83,11 @@ const Account = (props) => {
     // 서버에게 비밀번호를 바꿔주세요~ 라는 POST 요청을 보낼거에요.
     // 나는 서버에 2개를 보내야됨. 현재 비밀번호와 바뀔비밀번호
 
-    updateUserPwd(isLogin.userId, currentPwd, changePwd).then((res) => {
+    axios.post(`http://localhost:8080/api/v1/members/checkCurrentPassword/${isLogin.id}`, {
+      "currentPassword" : currentPwd,
+      "updatePassword" : changePwd
+    }).then((res) => {
       if (res.status === 200) {
-
         //  요청이 성공적이라면 내 로그인정보 비워주기 -> 결론 로그아웃 시킴
         const res = {
           isLogin : false,
@@ -90,8 +108,10 @@ const Account = (props) => {
         setIsMsgPopupOpen({show: true, msg: '비밀번호 변경이 완료 되었습니다.'});
       }
     }).catch((err) => {
-      setIsMsgPopupOpen({show: true, msg: err.data.message});
+      // debugger
+      // setIsMsgPopupOpen({show: true, msg: err.data.message});
     })
+
 
     // axios.post('http://cozlin.com/api/v1/user/update-pw-pagein', {
     //   id : isLogin.userId,
@@ -136,14 +156,40 @@ const Account = (props) => {
     setIsMsgPopupOpen({show: false, msg: ''});
   }
 
+  const chargePwdSubmit = () => {
+
+    axios.put(`http://localhost:8080/api/v1/members/charge/${isLogin.id}`, {
+      "pointBalance" : chargeData
+    }).then((res) => {
+      if (res.status === 200) {
+        const confirm1 = window.confirm(`정말로 ${chargeData.toLocaleString()}원을 충전 하시겠습니까 ?`);
+
+        if (confirm1) {
+          alert("포인트 충전이 완료 되었습니다.");
+          setObserver(!observer);
+          setChargeData(0);
+        }
+
+      }
+    }).catch((err) => {
+        console.log(err);
+    })
+  }
+
 
   // redux 에서 데이터를 꺼내오는 행위
   const userId = useSelector(state => state.loginCheck.loginInfo.userId);
 
-  // 1. password input 에 쓰는 데이터를 저장한다.
-  // 2. password input 에 정해져있는 정규식을 저장한다.
-  // 3. 비밀번호 변경요청을 한다.
 
+  // 날짜 형식 변환 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
   return (
     <>
       <PC>
@@ -175,12 +221,12 @@ const Account = (props) => {
             <div className={classes.line}></div>
             <div className={classes.input_layout}>
               <div>포인트 충전</div>
-              <InputBox onChange={currPwdHandler} type="text" inputTitle="충전할 포인트"  placeholder="1,000,000" />
+              <InputBox value={chargeData} onChange={chargePwdHandler} type="text" inputTitle="충전할 포인트"  placeholder="1,000,000" />
             </div>
 
             <div style={{display : 'flex', justifyContent : 'flex-end', paddingRight : '30px'}}>
               <div style={{width:'137px'}}>
-                <Button btn={{value:'충전하기', onClick:changePwdSubmit}}/>
+                <Button btn={{value:'충전하기', onClick:chargePwdSubmit}}/>
               </div>
             </div>
 
@@ -202,10 +248,15 @@ const Account = (props) => {
                   <div style={{width : '50%', textAlign : 'center'}}>로그인 시간</div>
                   <div style={{width : '50%', textAlign : 'center'}}>로그인 성공 여부</div>
                 </div>
-                <div style={{display: 'flex', gap : '15px', width : '250px'}}>
-                  <div style={{width : '50%', textAlign : 'center'}}>23/07/31</div>
-                  <div style={{width : '50%', textAlign : 'center'}}>성공</div>
-                </div>
+                {userHistory.map((item, idx) => (
+                  <div key={idx} style={{display: 'flex', gap : '15px', width : '250px', marginBottom : '10px'}}>
+                    <div style={{width : '50%', textAlign : 'center'}}>{formatDate(item.loginTime)}</div>
+                    <div style={{width : '50%', textAlign : 'center'}}>{item.successfulLogin ? '성공' : '실패'}</div>
+                  </div>
+                ))}
+
+
+
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ const initialIsLoginState = {
       id : null,
       username : null,
       memberSeq : null,
+      phoneNum : null
   }
 }
 

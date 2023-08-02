@@ -7,26 +7,14 @@ import InputDivComponent from "../../blocks/InputDivComponent";
 import Button from "../../atoms/Button";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import InputDivBox from "../../blocks/InputDivBox";
 
 
 const Profile = () => {
+
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
-    //  페이지 로딩할때 맨처음에 한번 실행
-    for (let i = 0; i < Object.keys(isLogin).length; i++) {
-      
-      if (isLogin[Object.keys(isLogin)[i]] ==  null) {
-        isLogin[Object.keys(isLogin)[i]] = "";
-      }
-
-    }
-
-  }, []);
 
   const currPwdHandler = (e) => {
     //
