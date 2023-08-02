@@ -9,25 +9,62 @@ import s7 from '../../asset/images/s7.webp';
 import s8 from '../../asset/images/s8.webp';
 import bookmark from "../../asset/images/bookmark2.png";
 import cart from "../../asset/images/myhistory.png"
+import {useEffect, useState} from "react";
 const Product = (props) => {
+  const [productInfo, setProductInfo] = useState(props);
+  const [imgSrc, setImgSrc] = useState(null);
+
+  useEffect(() => {
+    switch (productInfo.product.imgUrl) {
+      case 's1':
+        setImgSrc(s1);
+        break;
+      case 's2':
+        setImgSrc(s2);
+        break;
+      case 's3':
+        setImgSrc(s3);
+        break;
+      case 's4':
+        setImgSrc(s4);
+        break;
+      case 's5':
+        setImgSrc(s5);
+        break;
+      case 's6':
+        setImgSrc(s6);
+        break;
+      case 's7':
+        setImgSrc(s7);
+        break;
+      case 's8':
+        setImgSrc(s8);
+        break;
+      default:
+        setImgSrc(null);
+    }
+  }, [props.imgUrl]);
+
   return (
     <div className={classes.productWrap} onClick={props.onClick}>
       <div className={classes.imgWrap}>
-        <img className={classes.imgSize} src={s1} />
+        <img className={classes.imgSize} src={imgSrc} />
       </div>
       <div className={classes.infoSection}>
-        <h6 className={classes.productTitle}>Nike</h6>
-        <h6 className={classes.productSubTitle}>Nike SB Dunk Low Heineken</h6>
-        <h6 className={classes.productKorTitle}>나이키 SB 덩크 로우 하이네켄</h6>
-        <p className={classes.pruductPrice}>8,000,000 <span>원</span></p>
+        <div style={{height : '90px'}}>
+          <h6 className={classes.productTitle}>{productInfo.product.brand}</h6>
+          <h6 className={classes.productSubTitle}>{productInfo.product.ename}</h6>
+          <h6 className={classes.productKorTitle}>{productInfo.product.hname}</h6>
+        </div>
+        <p className={classes.pruductPrice}>{(productInfo.product.price).toLocaleString()} <span>원</span></p>
         <div className={classes.userFavSection}>
           <div className={classes.bookmarkSection}>
             <img className={classes.bookmark} src={bookmark} />
-            <span>203</span>
+            <span>{productInfo.product.interestDto.length}</span>
           </div>
           <div className={classes.bookmarkSection}>
             <img className={classes.bookmark} src={cart} />
-            <span>103</span>
+            <span>{productInfo.product.reviewDto.length}</span>
           </div>
         </div>
       </div>

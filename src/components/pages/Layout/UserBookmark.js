@@ -29,6 +29,7 @@ const UserBookmark = () => {
   const [addMoreDataCount, setAddMoreDataCount] = useState(1);
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
+  const [productList, setProductList] = useState([]);
 
 
 
@@ -39,15 +40,15 @@ const UserBookmark = () => {
       case 'Nike' :
         setFilterJobList(humanResourcesDevJob);
 
-        axios.get('https://cozlin.com/api/v1/user').then((res) => {
+        axios.get('http://localhost:8080/api/v1/products').then((res) => {
           if (res.status === 200) {
-            setUserTopListData(res.data.data.slice(0, 8));
-            setUserBotListData(res.data.data.slice(8, 20));
+            setProductList(res.data);
+            console.log(res.data);
           }
         })
-        .catch((err) => {
-          console.log(err);
-        })
+          .catch((err) => {
+            console.log(err);
+          })
 
       break;
       case 'Adidas' :
@@ -248,13 +249,9 @@ const UserBookmark = () => {
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
+              {productList.map((item, idx) => (
+                <Product product={item} idx={idx} key={idx} onClick={goToDetails} />
+              ))}
             </div>
           </section>
           {/*<section className={classes.bannerArea}>*/}

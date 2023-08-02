@@ -7,7 +7,7 @@ import {findUserJobInfo, testA, updateUserPwd} from "../../../common/api/ApiPost
 import axios from "axios";
 import InputComponent from "../../blocks/InputComponent";
 import Button from "../../atoms/Button";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { passCheck } from "../../../common/Reg";
 import PopupDom from "../../blocks/PopupDom";
 import MsgPopup from "../../blocks/MsgPopup";
@@ -20,11 +20,23 @@ const Account = (props) => {
   const [changePwd,  setChangePwd] = useState("");
   const [changeCheckPwd, setChangeCheckPwd] = useState("");
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
-
+  const [userGrade, setUserGrade] = useState('');
+  const [userPoint, setUserPoint] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
-  const isLogin = useSelector(state => state.loginCheck.loginInfo);  
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/v1/members/${isLogin.id}`)
+    .then((res) => {
+      setUserPoint(res.data.data.point.pointBalance);
+      setUserGrade(res.data.data.grade.gradeName);
+      console.log(res.data.data);
+    })
+    .catch((err) => {
+
+    })
+  }, []);
   
   const currPwdHandler = (e) => {
     setCurrentPwd(e.target.value);
@@ -130,7 +142,7 @@ const Account = (props) => {
   // 1. password input 에 쓰는 데이터를 저장한다.
   // 2. password input 에 정해져있는 정규식을 저장한다.
   // 3. 비밀번호 변경요청을 한다.
-  
+
   return (
     <>
       <PC>
@@ -151,11 +163,11 @@ const Account = (props) => {
                </div>
               <div className={classes.id_box}>
                 <div className={classes.id}>포인트</div>
-                <div style={{marginRight : '15px'}} className={classes.input_name}>12,230</div>
+                <div style={{marginRight : '15px'}} className={classes.input_name}>{userPoint.toLocaleString()}</div>
               </div>
               <div className={classes.id_box}>
                 <div className={classes.id}>등급</div>
-                <div className={classes.input_name}>1등급</div>
+                <div className={classes.input_name}>{userGrade}</div>
               </div>
             </div>
 

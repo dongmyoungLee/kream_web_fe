@@ -38,6 +38,7 @@ const HumanResources = () => {
   const [userBotListData, setUserBotListData] = useState([]);
   const [filterBlock, setFilterBlock] = useState([]);
   const [devUser, setDevUser] = useState([]);
+  const [productList, setProductList] = useState([]);
   const [addMoreDataCount, setAddMoreDataCount] = useState(1);
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
@@ -74,10 +75,10 @@ const HumanResources = () => {
       case 'Nike' :
         setFilterJobList(humanResourcesDevJob);
 
-        axios.get('https://cozlin.com/api/v1/user').then((res) => {
+        axios.get('http://localhost:8080/api/v1/products').then((res) => {
           if (res.status === 200) {
-            setUserTopListData(res.data.data.slice(0, 8));
-            setUserBotListData(res.data.data.slice(8, 20));
+            setProductList(res.data);
+            console.log(res.data);
           }
         })
         .catch((err) => {
@@ -85,17 +86,11 @@ const HumanResources = () => {
         })
 
       break;
-      case '기획' :
+      case 'Adidas' :
         setFilterJobList(humanResourcesPlannerJob);
       break;
-      case '마케팅' :
+      case 'New Balance' :
         setFilterJobList(humanResourcesMarketingJob);
-      break;
-      case '디자인' :
-        setFilterJobList(humanResourcesDesignJob);
-      break;
-      case '경영, 인사, 운영' :
-        setFilterJobList(humanResourcesEtcJob);
       break;
     }
 
@@ -137,18 +132,15 @@ const HumanResources = () => {
     // 새로운 데이터를 가져오는 비동기 요청 수행
     // 예를 들어, API 호출 등
     // 가져온 데이터를 기존 데이터와 결합하여 업데이트
-    userGet().then((res) => {
-      if (res.status === 200) {
-
-        const newData = res.data.data;
-        setUserBotListData(prevData => [...prevData, ...newData]);
-
-        setAddMoreDataCount(addMoreDataCount + 1);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios.get('http://localhost:8080/api/v1/products').then((res) => {
+    //   if (res.status === 200) {
+    //     setProductList(res.data);
+    //     console.log(res.data);
+    //   }
+    // })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
 
 
   };
@@ -350,13 +342,9 @@ const HumanResources = () => {
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
-              <Product onClick={goToDetails} />
+              {productList.map((item, idx) => (
+                <Product product={item} idx={idx} key={idx} onClick={goToDetails} />
+              ))}
             </div>
           </section>
           <section className={classes.mainContents}>

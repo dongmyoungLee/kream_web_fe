@@ -55,7 +55,7 @@ const Login = () => {
 
     loginAction(idInput, passInput)
       .then((res)=> {
-        if (res.data.id != null) {
+        if (res.data.status == "success") {
           // 로그인 성공
           navigate('/employment/human-resources');
           dispatch(loginCheckAction.loginInfoSet(res.data));
