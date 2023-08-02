@@ -30,21 +30,10 @@ const MypageToolTipMenu = (props) => {
       userPhone : null,
       userBirth : null,
       userAddr : null,
-      userJobEnterdYn : null,
-      userDesiredJobGroupCareer : null,
-      userDesiredJobGroup : null,
-      userDesiredJob : null,
-      userJobSkill : null,
-      userLastCompany : null,
-      userLastJobGroup : null,
-      userLastJobGroupCareer : null,
-      userLastSchoolName : null,
-      userLastSchoolStatus : null,
-      userLastSchoolDept : null,
-      userJobCareerYn : null
     }
 
-    dispatch(loginCheckAction.logout(res));
+    // Redux 에 있는 내 로그인정보를 비워주기
+    dispatch(loginCheckAction.loginInfoSet(res));
     props.hide();
     navigate("/employment/human-resources");
   }

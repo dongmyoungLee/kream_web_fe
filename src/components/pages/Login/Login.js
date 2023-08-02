@@ -58,7 +58,7 @@ const Login = () => {
         if (res.data.status == "success") {
           // 로그인 성공
           navigate('/employment/human-resources');
-          dispatch(loginCheckAction.loginInfoSet(res.data));
+          dispatch(loginCheckAction.loginInfoSet(res.data.data));
         } else {
           // 로그인 실패
           setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
