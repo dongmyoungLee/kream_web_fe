@@ -10,6 +10,7 @@ export const login = async (userId, userPwd) => {
       deliveries : null,
       id : null,
       username : null,
+      memberSeq : null
     }
   }
 

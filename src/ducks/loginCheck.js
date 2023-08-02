@@ -7,6 +7,7 @@ const initialIsLoginState = {
       deliveries : null,
       id : null,
       username : null,
+      memberSeq : null,
   }
 }
 

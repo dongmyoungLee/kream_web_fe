@@ -9,6 +9,7 @@ import userDefaultImg from "../../../asset/images/defaultuser.jpg";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Product from "../../blocks/Product";
+import ProductFav from "../../blocks/ProductFav";
 
 const UserBookmark = () => {
   const [category, setCategory] = useState('Nike');
@@ -30,8 +31,19 @@ const UserBookmark = () => {
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
   const [productList, setProductList] = useState([]);
+  const [observer, setObserver] = useState(false);
 
 
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/v1/members`).then((res) => {
+      if (res.status === 200) {
+        setProductList(res.data[0].interests);
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [observer])
 
 
   useEffect(() => {
@@ -39,17 +51,6 @@ const UserBookmark = () => {
     switch (category) {
       case 'Nike' :
         setFilterJobList(humanResourcesDevJob);
-
-        axios.get('http://localhost:8080/api/v1/products').then((res) => {
-          if (res.status === 200) {
-            setProductList(res.data);
-            console.log(res.data);
-          }
-        })
-          .catch((err) => {
-            console.log(err);
-          })
-
       break;
       case 'Adidas' :
         setFilterJobList(humanResourcesPlannerJob);
@@ -176,54 +177,6 @@ const UserBookmark = () => {
     navigate('/member/profile');
   }
 
-  const userTopList = userTopListData.length !== 0 ? userTopListData.map((item, idx) => (
-                                                    <div key={idx} className={classes.mainCard}>
-                                                      <div className={classes.imgArea}>
-                                                        <img style={{width : '100%', height : '100%'}} src={userDefaultImg} />
-                                                      </div>
-                                                      <div className={classes.mainNameArea}>
-                                                        <p>{item.userName}</p>
-                                                      </div>
-                                                      <div className={classes.mainJobArea}>
-                                                        <p className={classes.mainJobText}>{item.userJob.userDesiredJob}</p>
-                                                      </div>
-                                                      <div className={classes.iconInfoArea}>
-                                                        {item.userJob.userJobSkill.split(",").map((item, idx2) => (
-                                                          <div key={idx2} className={classes.iconWrap}>
-                                                            <div className={classes.iconInfo}>
-                                                            </div>
-                                                            <p className={classes.iconInfoText}>{item}</p>
-                                                          </div>
-                                                        ))}
-                                                      </div>
-                                                    </div>
-                                                  ))
-                                                : <p>조회되는 데이터가 없습니다.</p>;
-
-  const userBotList = userBotListData.length !== 0 ? userBotListData.map((item, idx) => (
-      <div key={idx} className={classes.mainCard}>
-        <div className={classes.imgArea}>
-          <img style={{width : '100%', height : '100%'}} src={userDefaultImg} />
-        </div>
-        <div className={classes.mainNameArea}>
-          <p>{item.userName}</p>
-        </div>
-        <div className={classes.mainJobArea}>
-          <p className={classes.mainJobText}>{item.userJob.userDesiredJob}</p>
-        </div>
-        <div className={classes.iconInfoArea}>
-          {item.userJob.userJobSkill.split(",").map((item, idx2) => (
-            <div key={idx2} className={classes.iconWrap}>
-              <div className={classes.iconInfo}>
-              </div>
-              <p className={classes.iconInfoText}>{item}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))
-    : <p>조회되는 데이터가 없습니다.</p>;
-
   const goToDetails = () => {
     navigate('/member/details');
   }
@@ -249,27 +202,12 @@ const UserBookmark = () => {
           </section>
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
-              {productList.map((item, idx) => (
-                <Product product={item} idx={idx} key={idx} onClick={goToDetails} />
+              {productList.length != 0 && productList.map((item, idx) => (
+                <ProductFav observer={() => setObserver(!observer)} product={item} idx={idx} key={idx} onClick={goToDetails} />
               ))}
+              {productList.length == 0 && <p style={{fontWeight : '500', fontSize : '18px'}}>관심 정보가 없습니다.</p>}
             </div>
           </section>
-          {/*<section className={classes.bannerArea}>*/}
-          {/*  <div className={classes.bannerAreaSection}>*/}
-          {/*    <div className={classes.bannerTextArea}>*/}
-          {/*      <h3 className={classes.bannerH3Option}>내 이력서는 어느 회사에 합격할 수 있을까 ?</h3>*/}
-          {/*      <div className={classes.bannerBtn}>*/}
-          {/*        <p>ChatGPT 이력서 코칭 받기 ></p>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*    <img src={bannerImg} className={classes.bannerImg} />*/}
-          {/*  </div>*/}
-          {/*</section>*/}
-          {/*<section className={classes.mainContents}>*/}
-          {/*  <div className={classes.mainCardWrap}>*/}
-          {/*    {userBotList}*/}
-          {/*  </div>*/}
-          {/*</section>*/}
         </Layout>
       </>
   );

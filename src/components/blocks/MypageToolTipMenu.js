@@ -23,13 +23,12 @@ const MypageToolTipMenu = (props) => {
   const logoutHandler =  () => {
     const res = {
       isLogin : false,
-      token : null,
-      loginEnteredTime : Date.now(),
       userId : null,
       userName : null,
       userPhone : null,
       userBirth : null,
       userAddr : null,
+      memberSeq : null
     }
 
     // Redux 에 있는 내 로그인정보를 비워주기

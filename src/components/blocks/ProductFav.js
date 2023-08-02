@@ -12,10 +12,9 @@ import cart from "../../asset/images/myhistory.png"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
-const Product = (props) => {
+const ProductFav = (props) => {
   const [productInfo, setProductInfo] = useState(props);
   const [imgSrc, setImgSrc] = useState(null);
-  const [bookMarkcount, setBookMarkcount] = useState(productInfo.product.interestDto.length);
   const memberSeq = useSelector(state => state.loginCheck.loginInfo.memberSeq);
 
   useEffect(() => {
@@ -49,34 +48,21 @@ const Product = (props) => {
     }
   }, [props.imgUrl]);
 
-  const bookmarkHandler = (e) => {
+  const deleteBookMark = () => {
+    const deleteBookmark = window.confirm("관심 상품을 삭제 하시겠습니까 ?");
 
-    const shouldBookmark = window.confirm("관심 상품으로 등록하시겠습니까?");
+    if (deleteBookmark) {
+      axios.delete(`http://localhost:8080/api/v1/interests/${memberSeq}/${productInfo.product.productSeq}`).then((res) => {
 
-    if (shouldBookmark) {
-      axios.post(`http://localhost:8080/api/v1/interests/${productInfo.product.productSeq}`, {
-        interestDate : "2023-08-02",
-        interestLike : 0
-      }, {
-        params : {
-          memberSeq : memberSeq
-        }
-      }).then((res) => {
         if (res.status === 200) {
-          setBookMarkcount(bookMarkcount + 1);
-          alert("관심정보가 추가 되었습니다.")
+          alert("해당 관심정보가 삭제 되었습니다.");
+          props.observer();
         }
       })
         .catch((err) => {
 
         })
     }
-
-
-  }
-
-  const cartHandler = () => {
-    alert("장바구니 추가");
   }
 
   return (
@@ -92,14 +78,7 @@ const Product = (props) => {
         </div>
         <p className={classes.pruductPrice}>{(productInfo.product.price).toLocaleString()} <span>원</span></p>
         <div className={classes.userFavSection}>
-          <div className={classes.bookmarkSection}>
-            <img className={classes.bookmark} onClick={bookmarkHandler} src={bookmark} />
-            <span>{bookMarkcount}</span>
-          </div>
-          <div className={classes.bookmarkSection}>
-            <img className={classes.bookmark} onClick={cartHandler} src={cart} />
-            <span>{productInfo.product.reviewDto.length}</span>
-          </div>
+          <p onClick={deleteBookMark} style={{cursor : 'pointer'}}>삭제</p>
         </div>
       </div>
 
@@ -107,4 +86,4 @@ const Product = (props) => {
   );
 }
 
-export default Product;
+export default ProductFav;

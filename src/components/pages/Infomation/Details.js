@@ -5,7 +5,7 @@ import bookmark from "../../../asset/images/bookmark2.png";
 import cart from "../../../asset/images/cart.png";
 import reviewImg from "../../../asset/images/review.jpeg";
 import Button from "../../atoms/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import QnaModal from "../../blocks/QnaModal";
 import ReviewModal from "../../blocks/ReviewModal";
 import Review from "../../blocks/Review";
@@ -14,6 +14,10 @@ const Details = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReviewPopup, setIsReviewPopup] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const qnaHandler = () => {
     setIsModalOpen(true);
   };

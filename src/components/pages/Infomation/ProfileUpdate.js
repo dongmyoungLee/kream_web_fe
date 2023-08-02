@@ -144,7 +144,8 @@ const ProfileUpdate = () => {
       address : null,
       deliveries : null,
       id : null,
-      username : null
+      username : null,
+      memberSeq : null
     }
 
     dispatch(loginCheckAction.logout(res));
