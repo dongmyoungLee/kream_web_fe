@@ -10,7 +10,6 @@ import d7 from "../../../asset/images/d7.webp";
 import d8 from "../../../asset/images/d8.webp";
 import bookmark from "../../../asset/images/bookmark2.png";
 import cart from "../../../asset/images/cart.png";
-import reviewImg from "../../../asset/images/review.jpeg";
 import Button from "../../atoms/Button";
 import {useEffect, useState} from "react";
 import QnaModal from "../../blocks/QnaModal";
@@ -19,6 +18,7 @@ import Review from "../../blocks/Review";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import QnaModalView from "../../blocks/QnaModalView";
+import {useSelector} from "react-redux";
 
 
 const Details = () => {
@@ -32,6 +32,8 @@ const Details = () => {
   const [observer, setObserver] = useState(false);
   const [qnAIdx, setQnAIdx] = useState(0);
   const [review, setReview] = useState('');
+  const isLogin = useSelector(state => state.loginCheck.loginInfo);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -116,6 +118,33 @@ const Details = () => {
     setIsAnswerModalOpen(false);
   }
 
+  const buyHandler = () => {
+    const deleteBookmark = window.confirm("구매 하시겠습니까 ?");
+
+    if (deleteBookmark) {
+      axios.post(`http://localhost:8080/api/v1/orders/${productSeq}/${isLogin.memberSeq}`, {
+        "orderNum" : "SFLDLDSMF12",
+        "orderDate" : "2023-08-03",
+        "paymentAmount" : productInfoData.price,
+        "paymentMethod" : "card",
+        "paymentStatus" : "결제",
+        "cardType" : "신한",
+        "paymentDate" : "2023-08-03T15:23:23",
+        "recipientAddress" : isLogin.address,
+        "memberSeq" : isLogin.memberSeq
+      })
+        .then((res) => {
+          if(res.status == 200) {
+            alert("구매가 완료되었습니다.");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+  }
+
   return (
     <>
       <Layout>
@@ -143,7 +172,7 @@ const Details = () => {
                 <p style={{fontSize : '18px', fontWeight : '600', color : '#222'}}>{productInfoData.price == undefined ? 0 : productInfoData.price.toLocaleString()}원</p>
               </div>
 
-              <div className={classes.buyBtn}>
+              <div className={classes.buyBtn} onClick={buyHandler}>
                 <p>구매</p>
               </div>
 

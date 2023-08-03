@@ -22,6 +22,10 @@ const Order = () => {
   const [userPayInfo, setUserPayInfo] = useState('');
   const [userDeliInfo, setUserDeliInfo] = useState('');
   const [imgSrc, setImgSrc] = useState('');
+  const [del1, setDel1] = useState(0);
+  const [del2, setDel2] = useState(0);
+  const [del3, setDel3] = useState(0);
+  const [del4, setDel4] = useState(0);
 
 
   const navigate = useNavigate();
@@ -33,7 +37,26 @@ const Order = () => {
       .then((res) => {
       if (res.status === 200) {
         setUserPayInfo(res.data);
-        console.log(res.data)
+
+        console.log()
+
+        switch (res.data[0].delivery[0].deliveryStatus) {
+          case 1 :
+            setDel1(1);
+          break;
+
+          case 2 :
+            setDel2(1);
+          break;
+
+          case 3 :
+            setDel3(1);
+          break;
+
+          case 4 :
+            setDel4(1);
+          break;
+        }
       }
     }).catch((err) => {
       console.log(err);
@@ -86,28 +109,28 @@ const Order = () => {
           <div className={classes.orderWrap}>
             <div className={classes.orderBox}>
               <div className={classes.orderStatusWrap}>
-                <span className={classes.orderStatusCount}>0</span>
+                <span className={classes.orderStatusCount}>{del1}</span>
                 <span className={classes.orderBotText}>결제완료</span>
               </div>
               <img className={classes.orderArrow} src="https://abcmart.a-rt.com/static/images/mypage/mypage_icon_order_list_arrow.png" />
             </div>
             <div className={classes.orderBox}>
               <div className={classes.orderStatusWrap}>
-                <span className={classes.orderStatusCount}>0</span>
+                <span className={classes.orderStatusCount}>{del2}</span>
                 <span className={classes.orderBotText}>상품준비중</span>
               </div>
               <img className={classes.orderArrow} src="https://abcmart.a-rt.com/static/images/mypage/mypage_icon_order_list_arrow.png" />
             </div>
             <div className={classes.orderBox}>
               <div className={classes.orderStatusWrap}>
-                <span className={classes.orderStatusCount}>0</span>
+                <span className={classes.orderStatusCount}>{del3}</span>
                 <span className={classes.orderBotText}>배송중/픽업준비완료</span>
               </div>
               <img className={classes.orderArrow} src="https://abcmart.a-rt.com/static/images/mypage/mypage_icon_order_list_arrow.png" />
             </div>
             <div className={classes.orderBox}>
               <div className={classes.orderStatusWrap}>
-                <span className={classes.orderStatusCount}>0</span>
+                <span className={classes.orderStatusCount}>{del4}</span>
                 <span className={classes.orderBotText}>배송/수령완료</span>
               </div>
             </div>
@@ -133,7 +156,7 @@ const Order = () => {
               <div className={classes.deliContentLeft}>
                 <div className={classes.leftContents}>
                   <div className={classes.imgWrap}>
-                    <img src={item.imgUrl} className={classes.imgSize} />
+                    <img src="https://png.pngtree.com/png-vector/20210414/ourlarge/pngtree-shoes-icon-design-template-illustration-png-image_3177407.jpg" className={classes.imgSize} />
                   </div>
                   <div>
                     <p className={classes.firstText}>{item.product.brand}</p>
