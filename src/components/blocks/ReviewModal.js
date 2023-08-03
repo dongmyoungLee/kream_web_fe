@@ -1,14 +1,42 @@
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
+import axios from "axios";
+import {useState} from "react";
 
 const ReviewModal = (props) => {
 
-  const nameInputHandler = () => {
+  const [imgSrc, setImgSrc] = useState('');
+  const [contentInput, setContentInput] = useState('');
+  const [starInput, setStarInput] = useState(0);
 
+
+  const imgHandler = (e) => {
+    setImgSrc(e.target.value);
+  }
+
+  const contentHandler = (e) => {
+    setContentInput(e.target.value);
+  }
+
+  const starHandler = (e) => {
+    setStarInput(e.target.value);
   }
 
   const addQnA = () => {
-
+    axios.post(`http://localhost:8080/api/v1/reviews/${props.productSeq}`, {
+      "content" : contentInput,
+      "rating" :   starInput,
+      "reviewImg" : imgSrc,
+      "heart" : 0
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("리뷰가 등록 되었습니다.");
+        props.onClose();
+      }
+    })
+    .catch((err) => {
+        console.log(err);
+    })
   }
 
   return (
@@ -26,15 +54,8 @@ const ReviewModal = (props) => {
       }}
     >
       <div style={{marginBottom : '15px'}}>
-        <Input label='리뷰 제목' onChange={nameInputHandler} input={{
-          type : 'text',
-          placeholder : '제목을 입력하세요.',
-          name: 'reviewTitle'
-        }} />
 
-        <div style={{width : '100%', height : '20px'}}></div>
-
-        <Input label='리뷰 사진 URL' onChange={nameInputHandler} input={{
+        <Input label='리뷰 사진 URL' onChange={imgHandler} input={{
           type : 'text',
           placeholder : 'URL을 입력하세요.',
           name: 'reviewURL'
@@ -42,9 +63,17 @@ const ReviewModal = (props) => {
 
         <div style={{width : '100%', height : '20px'}}></div>
 
-        <Input label='리뷰 내용' onChange={nameInputHandler} input={{
+        <Input label='리뷰 내용' onChange={contentHandler} input={{
           type : 'text',
           placeholder : '내용을 입력하세요.',
+          name: 'reviewContent'
+        }} />
+
+        <div style={{width : '100%', height : '20px'}}></div>
+
+        <Input label='별점' onChange={starHandler} input={{
+          type : 'text',
+          placeholder : '1~5점을 입력해주세요.',
           name: 'reviewContent'
         }} />
       </div>

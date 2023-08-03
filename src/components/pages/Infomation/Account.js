@@ -187,8 +187,11 @@ const Account = (props) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
 
-    return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   };
   return (
     <>
@@ -244,14 +247,14 @@ const Account = (props) => {
             <div className={classes.input_layout}>
               <div>로그인 히스토리</div>
               <div>
-                <div style={{display: 'flex', gap : '15px', width : '250px', marginBottom : '10px', backgroundColor : '#eee', padding: '10px', borderRadius : '5px'}}>
+                <div style={{display: 'flex', gap : '15px', width : '500px', marginBottom : '10px', backgroundColor : '#eee', padding: '10px', borderRadius : '5px'}}>
                   <div style={{width : '50%', textAlign : 'center'}}>로그인 시간</div>
                   <div style={{width : '50%', textAlign : 'center'}}>로그인 성공 여부</div>
                 </div>
                 {userHistory.map((item, idx) => (
-                  <div key={idx} style={{display: 'flex', gap : '15px', width : '250px', marginBottom : '10px'}}>
-                    <div style={{width : '50%', textAlign : 'center'}}>{formatDate(item.loginTime)}</div>
-                    <div style={{width : '50%', textAlign : 'center'}}>{item.successfulLogin ? '성공' : '실패'}</div>
+                  <div key={idx} style={{display: 'flex', gap : '15px', width : '500px', marginBottom : '10px'}}>
+                    <div style={{width : '50%', paddingLeft : '55px'}}>{formatDate(item.loginTime)}</div>
+                    <div style={{width : '50%', textAlign : "right",paddingRight : '105px'}}>{item.successfulLogin ? '성공' : '실패'}</div>
                   </div>
                 ))}
 

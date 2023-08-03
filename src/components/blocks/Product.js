@@ -16,9 +16,12 @@ const Product = (props) => {
   const [productInfo, setProductInfo] = useState(props);
   const [imgSrc, setImgSrc] = useState(null);
   const [bookMarkcount, setBookMarkcount] = useState(productInfo.product.interestDto.length);
+
   const memberSeq = useSelector(state => state.loginCheck.loginInfo.memberSeq);
 
+
   useEffect(() => {
+
     switch (productInfo.product.imgUrl) {
       case 's1':
         setImgSrc(s1);
@@ -90,7 +93,7 @@ const Product = (props) => {
           <h6 className={classes.productSubTitle}>{productInfo.product.ename}</h6>
           <h6 className={classes.productKorTitle}>{productInfo.product.hname}</h6>
         </div>
-        <p className={classes.pruductPrice}>{(productInfo.product.price).toLocaleString()} <span>원</span></p>
+        <p className={classes.pruductPrice}>{(productInfo.product.price) == null ? 0 :(productInfo.product.price).toLocaleString()} <span>원</span></p>
         <div className={classes.userFavSection}>
           <div className={classes.bookmarkSection}>
             <img className={classes.bookmark} onClick={bookmarkHandler} src={bookmark} />

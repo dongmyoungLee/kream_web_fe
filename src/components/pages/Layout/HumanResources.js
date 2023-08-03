@@ -249,8 +249,8 @@ const HumanResources = () => {
     navigate('/member/profile');
   }
 
-  const goToDetails = () => {
-    navigate('/member/details');
+  const goToDetails = (productSeq) => {
+    navigate(`/member/details/${productSeq}`);
   }
 
   const userTopList = userTopListData.length !== 0 ? userTopListData.map((item, idx) => (
@@ -343,7 +343,7 @@ const HumanResources = () => {
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
               {productList.map((item, idx) => (
-                <Product product={item} idx={idx} key={idx} onClick={goToDetails} />
+                <Product product={item} idx={idx} key={idx} onClick={() => goToDetails(item.productSeq)} />
               ))}
             </div>
           </section>

@@ -177,8 +177,8 @@ const UserBookmark = () => {
     navigate('/member/profile');
   }
 
-  const goToDetails = () => {
-    navigate('/member/details');
+  const goToDetails = (productSeq) => {
+    navigate(`/member/details/${productSeq}`);
   }
 
   return (
@@ -203,7 +203,7 @@ const UserBookmark = () => {
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
               {productList.length != 0 && productList.map((item, idx) => (
-                <ProductFav observer={() => setObserver(!observer)} product={item} idx={idx} key={idx} onClick={goToDetails} />
+                <ProductFav observer={() => setObserver(!observer)} product={item} idx={idx} key={idx} onClick={() => goToDetails(item.productSeq)} />
               ))}
               {productList.length == 0 && <p style={{fontWeight : '500', fontSize : '18px'}}>관심 정보가 없습니다.</p>}
             </div>

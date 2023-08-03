@@ -27,15 +27,12 @@ const Review = (props) => {
       }}
     >
       <div style={{marginBottom : '15px'}}>
-        <img style={{height : '300px'}} src={reviewImg} />
+        <img style={{height : '300px'}} src={props.review.reviewImg} />
       </div>
 
-      <div style={{marginBottom : '10px'}}>
-        <p style={{fontWeight : '600', fontSize : '18px'}}>좋긴한데 너무 비싸다</p>
-      </div>
-
-      <div style={{marginBottom : '20px'}}>
-        <p>진짜 좋긴 한데 너무 비쌈 이건 리뷰 상세 내용</p>
+      <div style={{marginBottom : '20px', display: 'flex', justifyContent : 'space-between'}}>
+        <p>{props.review.content}</p>
+        <p style={{fontWeight : '600'}}>{props.review.rating}/5점</p>
       </div>
 
       <Button btn={{

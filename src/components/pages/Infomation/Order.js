@@ -4,20 +4,45 @@ import {useSelector} from "react-redux";
 import classes from '../../../styles/pages/layout/mypage.module.css';
 import InputDivComponent from "../../blocks/InputDivComponent";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Applicant2 from "../../blocks/Applicant2";
 import s1 from "../../../asset/images/s1.webp";
+import axios from "axios";
+import s2 from "../../../asset/images/s2.webp";
+import s3 from "../../../asset/images/s3.webp";
+import s4 from "../../../asset/images/s4.webp";
+import s5 from "../../../asset/images/s5.webp";
+import s6 from "../../../asset/images/s6.webp";
+import s7 from "../../../asset/images/s7.webp";
+import s8 from "../../../asset/images/s8.webp";
 
 
 const Order = () => {
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
+  const [userPayInfo, setUserPayInfo] = useState('');
+  const [userDeliInfo, setUserDeliInfo] = useState('');
+  const [imgSrc, setImgSrc] = useState('');
+
 
   const navigate = useNavigate();
 
+
+
   useEffect(() => {
+    axios.get(`http://localhost:8080/api/v1/orders/${isLogin.memberSeq}`)
+      .then((res) => {
+      if (res.status === 200) {
+        setUserPayInfo(res.data);
+        console.log(res.data)
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
 
 
   }, []);
+
+
 
   const currPwdHandler = (e) => {
     //
@@ -46,7 +71,7 @@ const Order = () => {
   </div>
 
   return (
-    <MypageLayout >
+    <MypageLayout remove_height="profile">
       <Applicant2 />
       <div className={classes.account}>
         <div className={classes.management_box}>
@@ -94,46 +119,52 @@ const Order = () => {
             <h2 className={classes.h2_option2}>배송 현황</h2>
           </div>
         </div>
-        <div>
-          <div className={classes.line3}></div>
-          <div className={classes.deliItem}>
-            <div className={classes.rightDeli}>
-              <p>주문 번호 <span className={classes.spanHighlight}>2023071827746</span></p>
-              <p>주문 일시 <span className={classes.spanHighlight}>2023-07-18 11:17:25</span></p>
+        {userPayInfo != '' && userPayInfo.map((item, idx) => (
+          <div key={idx}>
+            <div className={classes.line3}></div>
+            <div className={classes.deliItem}>
+              <div className={classes.rightDeli}>
+                <p>주문 번호 <span className={classes.spanHighlight}>{item.orderNum}</span></p>
+                <p>주문 일시 <span className={classes.spanHighlight}>{item.orderDate}</span></p>
+              </div>
             </div>
-            <div className={classes.leftDeli}>
-              <p>총 결제금액 <span className={classes.priceSpan}>8,000,000원</span></p>
+            <div className={classes.line3}></div>
+            <div className={classes.deliContent}>
+              <div className={classes.deliContentLeft}>
+                <div className={classes.leftContents}>
+                  <div className={classes.imgWrap}>
+                    <img src={item.imgUrl} className={classes.imgSize} />
+                  </div>
+                  <div>
+                    <p className={classes.firstText}>{item.product.brand}</p>
+                    <p className={classes.secondText}>{item.product.ename}</p>
+                    <p className={classes.thirdText}>{item.product.hname}</p>
+                    <p className={classes.fourthText}>{item.product.options} / 1개</p>
+                  </div>
+                </div>
+              </div>
+              <div className={classes.deliContentRight}>
+                <div className={classes.priceBox}>
+                  <p><span style={{color : '#ee1c25', fontWeight: '600', fontSize: '18px'}}>{item.product.price == undefined ? 0 : item.product.price.toLocaleString()} </span> 원</p>
+                </div>
+
+                <div className={classes.priceBox2}>
+                  {item.delivery[0] != undefined && item.delivery[0].deliveryStatus == 1 && <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>결제완료</p>}
+                  {item.delivery[0] != undefined && item.delivery[0].deliveryStatus == 2 && <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>상품준비중</p>}
+                  {item.delivery[0] != undefined && item.delivery[0].deliveryStatus == 3 && <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>배송중/픽업준비완료</p>}
+                  {item.delivery[0] != undefined && item.delivery[0].deliveryStatus == 4 && <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>배송/수령완료</p>}
+
+                  {item.delivery[0] != undefined && item.delivery[0].deliveryStatus != 1 && item.delivery[0].deliveryStatus != 2 && <div>
+                    <p style={{fontSize : '13px', color : '#666', marginBottom : '3px'}}>한진택배</p>
+                    <p style={{fontSize : '13px', fontWeight : '700', textDecoration : 'underline'}}>513419024160</p>
+                  </div>}
+
+                </div>
+              </div>
             </div>
           </div>
-          <div className={classes.line3}></div>
-          <div className={classes.deliContent}>
-            <div className={classes.deliContentLeft}>
-              <div className={classes.leftContents}>
-                <div className={classes.imgWrap}>
-                  <img src={s1} className={classes.imgSize} />
-                </div>
-                <div>
-                  <p className={classes.firstText}>Nike</p>
-                  <p className={classes.secondText}>Nike SB Dunk Low Heineken</p>
-                  <p className={classes.thirdText}>나이키 SB 덩크 로우 하이네켄</p>
-                  <p className={classes.fourthText}>245 / 1개</p>
-                </div>
-              </div>
-            </div>
-            <div className={classes.deliContentRight}>
-              <div className={classes.priceBox}>
-                <p><span style={{color : '#ee1c25', fontWeight: '600', fontSize: '18px'}}>8,000,000</span> 원</p>
-              </div>
-              <div className={classes.priceBox2}>
-                <p style={{fontSize : '15px', fontWeight : '600', marginBottom : '10px'}}>배송완료</p>
-                <div>
-                  <p style={{fontSize : '13px', color : '#666', marginBottom : '3px'}}>한진택배</p>
-                  <p style={{fontSize : '13px', fontWeight : '700', textDecoration : 'underline'}}>513419024160</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
+
       </div>
     </MypageLayout>
   );

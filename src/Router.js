@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         element: <Order />
       }
       ,{
-        path : 'details',
+        path : 'details/:productSeq',
         element: <Details />
       },
 

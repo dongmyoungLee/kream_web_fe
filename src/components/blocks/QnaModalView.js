@@ -4,7 +4,7 @@ import {useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 
-const QnaModal = (props) => {
+const QnaModalView = (props) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
@@ -47,35 +47,14 @@ const QnaModal = (props) => {
         borderRadius: '10px'
       }}
     >
-      <div style={{marginBottom : '15px'}}>
-        <Input label='Q&A 제목' onChange={titleHandler} input={{
-          type : 'text',
-          placeholder : '제목을 입력하세요.',
-          name: 'userName'
-        }} />
-
-        <div style={{width : '100%', height : '20px'}}></div>
-
-        <Input label='Q&A 내용' onChange={contentHandler} input={{
-          type : 'text',
-          placeholder : '내용을 입력하세요.',
-          name: 'userName'
-        }} />
-      </div>
+      <h2>답변</h2>
+      <p style={{padding: '30px'}}>{props.answer}</p>
 
       <div style={{display : 'flex', justifyContent : 'space-around'}}>
         <Button btn={{
           type : '',
-          value : '등록',
-          onClick : addQnA,
-          width : '40%',
-          height : '45px'
-        }} />
-        <Button btn={{
-          type : '',
           value : '닫기',
           onClick : props.onClose,
-          width : '40%',
           height : '45px'
         }} />
       </div>
@@ -83,4 +62,4 @@ const QnaModal = (props) => {
   );
 }
 
-export default QnaModal;
+export default QnaModalView;
