@@ -124,7 +124,7 @@ const Login = () => {
       return ;
     }
 
-    signUp(idInput, passInput,(userPostData + ' ' +  userAddrDetail), nameInput)
+    signUp(idInput, passInput,(userPostData + ' ' +  userAddrDetail), nameInput, phoneInput)
     .then((res) => {
       if (res.status === 200) {
         setAfterVisitPath('/member/login');
@@ -230,6 +230,17 @@ const Login = () => {
                           maxLength: 10,
                         }} />
 
+                        <div className={classes2.flexOption}>
+                          <Input label='연락처' onBlur={phoneBlur} onChange={phoneInputHandler}  input={{
+                            type : 'text',
+                            placeholder : '"-(하이픈)" 을 빼고 입력 해주세요.',
+                            width : phoneInputWidth,
+                            name: 'userPhone',
+                            maxLength: 13,
+                          }} />
+                          {/*<button tabIndex='-1' style={{display : isPhoneBtnShow ? 'block' : 'none', transition : '0.5s'}} className={classes2.buttonOption}>인증</button>*/}
+                        </div>
+
                         <Input label='주소' onClick={openPostCode} input={{
                           type : 'text',
                           readOnly : 'readonly',
@@ -276,6 +287,17 @@ const Login = () => {
                               name: 'userName',
                               maxLength: 10,
                             }} />
+
+                            <div className={classes2.flexOption}>
+                              <Input label='연락처' onBlur={phoneBlur} onChange={phoneInputHandler}  input={{
+                                type : 'text',
+                                placeholder : '"-(하이픈)" 을 빼고 입력 해주세요.',
+                                width : phoneInputWidth,
+                                name: 'userPhone',
+                                maxLength: 13,
+                              }} />
+                              {/*<button tabIndex='-1' style={{display : isPhoneBtnShow ? 'block' : 'none', transition : '0.5s'}} className={classes2.buttonOption}>인증</button>*/}
+                            </div>
 
                             <Input label='주소' onClick={openPostCode} input={{
                               type : 'text',

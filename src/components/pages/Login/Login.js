@@ -48,10 +48,10 @@ const Login = () => {
       return ;
     }
 
-    if (!passCheck(passInput)) {
-      setIsMsgPopupOpen({show: true, msg: '비밀번호를 형식에 맞게 입력해주세요.'});
-      return ;
-    }
+    // if (!passCheck(passInput)) {
+    //   setIsMsgPopupOpen({show: true, msg: '비밀번호를 형식에 맞게 입력해주세요.'});
+    //   return ;
+    // }
 
     loginAction(idInput, passInput)
       .then((res)=> {

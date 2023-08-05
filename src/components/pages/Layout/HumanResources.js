@@ -2,20 +2,16 @@ import Layout from "../../blocks/Layout";
 import CategorySection from "../../blocks/CategorySection";
 import classes from "../../../styles/pages/layout/humanResources.module.css";
 import FilterButton from "../../blocks/FilterButton";
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState} from "react";
 import {
   careerFilterCategory,
-  humanResourcesDesignJob,
   humanResourcesDevJob,
-  humanResourcesEtcJob,
   humanResourcesMarketingJob,
   humanResourcesPlannerJob,
   regionFilterCategory
 } from "../../../common/Menus";
 import FilteredItem from "../../blocks/FilteredItem";
-import {userGet} from "../../../common/api/ApiGetService";
 import {useSelector} from "react-redux";
-import userDefaultImg from "../../../asset/images/defaultuser.jpg";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Product from "../../blocks/Product";
@@ -42,6 +38,14 @@ const HumanResources = () => {
   const [addMoreDataCount, setAddMoreDataCount] = useState(1);
   const navigate = useNavigate();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
+  const [requestSize, setRequestSize] = useState('');
+  const [saveData, setSaveData] = useState([]);
+
+  useEffect(() => {
+    // productList 상태 업데이트 후에 화면 다시 렌더링
+    // productList 상태가 변경될 때마다 실행됩니다.
+    console.log(productList)
+   }, [productList]);
 
   useEffect(() => {
     const swiperOptions = {
@@ -78,7 +82,6 @@ const HumanResources = () => {
         axios.get('http://localhost:8080/api/v1/products').then((res) => {
           if (res.status === 200) {
             setProductList(res.data);
-            console.log(res.data);
           }
         })
         .catch((err) => {
@@ -193,8 +196,24 @@ const HumanResources = () => {
 
       const tmp = [...filterBlock, e.target.value];
       setFilterBlock(tmp);
-    } else {
 
+      // careerArray의 각 요소별로 size 파라미터를 생성합니다.
+      const sizeParams = careerArray.map(career => `size=${career}`).join('&');
+      setRequestSize(sizeParams);
+
+      axios.post(`http://localhost:8080/api/v1/products/searchBySizeColor?${sizeParams}&color=default`, {})
+        .then((res) => {
+          if (res.status === 200) {
+            // 데이터 업데이트 후 렌더링을 강제로 다시 실행
+            const newData = res.data.data;
+
+            setProductList(newData);
+          }
+        })
+        .catch((err) => {
+          // 오류 처리
+        });
+    } else {
       setUserCareerFilter((prevItems) => prevItems.filter((item) => item !== e.target.value));
       setFilterBlock((prevItems) => prevItems.filter((item) => item !== e.target.value));
 
@@ -203,20 +222,38 @@ const HumanResources = () => {
   }
 
   const checkBoxChangeRegionHandler = (e) => {
-
     if (e.target.checked) {
-      const regionArray = [...userRegionFilter, e.target.value];
+      const region = e.target.value;
+      const updatedRegionArray = [...userRegionFilter, region];
 
       setSelectRegionCategoryCount(selectRegionCategoryCount + 1);
+      setUserRegionFilter(updatedRegionArray);
+      setFilterBlock((prevItems) => [...prevItems, region]);
 
-      setUserRegionFilter(regionArray);
+      const regionParams = updatedRegionArray.map(region => `color=${region}`).join('&');
 
-      const tmp = [...filterBlock, e.target.value];
-      setFilterBlock(tmp);
+      const sizeAndRegionParams = `${requestSize}&${regionParams}`;
+
+      axios.post(`http://localhost:8080/api/v1/products/searchBySizeColor?${sizeAndRegionParams}`, {})
+        .then((res) => {
+          if (res.status === 200) {
+            // 데이터 업데이트 후 렌더링을 강제로 다시 실행
+            setProductList(res.data.data);
+            console.log(res.data.data)
+          }
+        })
+        .catch((err) => {
+          // 오류 처리
+        });
     } else {
-      setUserRegionFilter((prevItems) => prevItems.filter((item) => item !== e.target.value));
-      setFilterBlock((prevItems) => prevItems.filter((item) => item !== e.target.value));
+      const regionToRemove = e.target.value;
+
+      setUserRegionFilter((prevItems) => prevItems.filter((item) => item !== regionToRemove));
+      setFilterBlock((prevItems) => prevItems.filter((item) => item !== regionToRemove));
       setSelectRegionCategoryCount(selectRegionCategoryCount - 1);
+
+      // 체크 해제 시 빈 데이터로 업데이트
+      setProductList([]);
     }
   }
 
@@ -253,53 +290,6 @@ const HumanResources = () => {
     navigate(`/member/details/${productSeq}`);
   }
 
-  const userTopList = userTopListData.length !== 0 ? userTopListData.map((item, idx) => (
-                                                    <div key={idx} className={classes.mainCard}>
-                                                      <div className={classes.imgArea}>
-                                                        <img style={{width : '100%', height : '100%'}} src={userDefaultImg} />
-                                                      </div>
-                                                      <div className={classes.mainNameArea}>
-                                                        <p>{item.userName}</p>
-                                                      </div>
-                                                      <div className={classes.mainJobArea}>
-                                                        <p className={classes.mainJobText}>{item.userJob.userDesiredJob}</p>
-                                                      </div>
-                                                      <div className={classes.iconInfoArea}>
-                                                        {item.userJob.userJobSkill.split(",").map((item, idx2) => (
-                                                          <div key={idx2} className={classes.iconWrap}>
-                                                            <div className={classes.iconInfo}>
-                                                            </div>
-                                                            <p className={classes.iconInfoText}>{item}</p>
-                                                          </div>
-                                                        ))}
-                                                      </div>
-                                                    </div>
-                                                  ))
-                                                : <p>조회되는 데이터가 없습니다.</p>;
-
-  const userBotList = userBotListData.length !== 0 ? userBotListData.map((item, idx) => (
-      <div key={idx} className={classes.mainCard}>
-        <div className={classes.imgArea}>
-          <img style={{width : '100%', height : '100%'}} src={userDefaultImg} />
-        </div>
-        <div className={classes.mainNameArea}>
-          <p>{item.userName}</p>
-        </div>
-        <div className={classes.mainJobArea}>
-          <p className={classes.mainJobText}>{item.userJob.userDesiredJob}</p>
-        </div>
-        <div className={classes.iconInfoArea}>
-          {item.userJob.userJobSkill.split(",").map((item, idx2) => (
-            <div key={idx2} className={classes.iconWrap}>
-              <div className={classes.iconInfo}>
-              </div>
-              <p className={classes.iconInfoText}>{item}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))
-    : <p>조회되는 데이터가 없습니다.</p>;
 
 
   return (

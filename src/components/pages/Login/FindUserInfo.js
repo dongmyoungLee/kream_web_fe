@@ -9,12 +9,15 @@ import {findIdService, findPwdService} from "../../../common/api/ApiPostService"
 import PopupDom from "../../blocks/PopupDom";
 import MsgPopup from "../../blocks/MsgPopup";
 import {emailCheck, numberCheck} from "../../../common/Reg";
+import axios from "axios";
+import {useSelector} from "react-redux";
 
 const FindUserInfo = () => {
   const [isFindType, setIsFindType] = useState('id');
   const [phoneInput, setPhoneInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
+  const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
   const radioChangeHandler = (e) => {
     setIsFindType(e.target.value);
@@ -49,18 +52,25 @@ const FindUserInfo = () => {
         setIsMsgPopupOpen({show: true, msg: '아이디를 이메일형식으로 입력해주세요.'});
         return ;
       }
-
-      findPwdService(emailInput, 'find')
-          .then((res) => {
-
-            if (res.status === 200) {
-              setIsMsgPopupOpen({show: true, msg: res.data.data});
-            }
-
-          })
-          .catch((error) => {
-            setIsMsgPopupOpen({show: true, msg: error.response.data.data});
-          })
+      axios.get(`http://localhost:8080/api/v1/members/findPassword/${emailInput}`).then((res) => {
+        if (res.status === 200) {
+          setIsMsgPopupOpen({show: true, msg: '임시비밀번호가 메일로 발송되었습니다.'});
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      // findPwdService(emailInput, 'find')
+      //     .then((res) => {
+      //
+      //       if (res.status === 200) {
+      //         setIsMsgPopupOpen({show: true, msg: res.data.data});
+      //       }
+      //
+      //     })
+      //     .catch((error) => {
+      //       setIsMsgPopupOpen({show: true, msg: error.response.data.data});
+      //     })
 
         return ;
     } else {

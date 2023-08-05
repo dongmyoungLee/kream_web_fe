@@ -15,7 +15,7 @@ import {useSelector} from "react-redux";
 const Product = (props) => {
   const [productInfo, setProductInfo] = useState(props);
   const [imgSrc, setImgSrc] = useState(null);
-  const [bookMarkcount, setBookMarkcount] = useState(productInfo.product.interestDto.length);
+  const [bookMarkcount, setBookMarkcount] = useState(productInfo.product.interestDto != undefined ? productInfo.product.interestDto.length : 0);
 
   const memberSeq = useSelector(state => state.loginCheck.loginInfo.memberSeq);
 
@@ -101,7 +101,7 @@ const Product = (props) => {
           </div>
           <div className={classes.bookmarkSection}>
             <img className={classes.bookmark} onClick={cartHandler} src={cart} />
-            <span>{productInfo.product.reviewDto.length}</span>
+            <span>{productInfo.product.reviewDto != undefined ? productInfo.product.reviewDto.length : 0}</span>
           </div>
         </div>
       </div>

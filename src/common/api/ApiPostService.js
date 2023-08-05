@@ -15,11 +15,13 @@ export const findIdService = (userPhone) => apiClient.post('/api/v1/user/getUser
 })
 
 
-export const signUp = (id, pwd, addr, name) => apiClient.post('/api/v1/members/insert', {
+export const signUp = (id, pwd, addr, name, phone) => apiClient.post('/api/v1/members/insert', {
   id: id,
   password: pwd,
   address: addr,
-  username: name
+  username: name,
+  phoneNum : phone
+
 })
 
 export const loginAction = (id, password) => apiClient.post('/api/v1/members/login', {

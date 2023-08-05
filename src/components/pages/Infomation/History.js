@@ -10,8 +10,8 @@ import axios from "axios";
 const History = () => {
   const navigate = useNavigate();
   const [productList, setProductList] = useState([]);
-  const goToDetails = () => {
-    navigate('/member/details');
+  const goToDetails = (productSeq) => {
+    navigate(`/member/details/${productSeq}`);
   }
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const History = () => {
         <div className={classes.line}></div>
         <div className={classes.cartWrap}>
           {productList.map((item, idx) => (
-            <Product product={item} idx={idx} key={idx} onClick={goToDetails} />
+            <Product product={item} idx={idx} key={idx} onClick={() => goToDetails(item.productSeq)} />
           ))}
         </div>
       </div>

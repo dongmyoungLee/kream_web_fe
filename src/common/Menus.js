@@ -97,30 +97,33 @@ export const careerFilterCategory = [
   },
   {
     menuName : '270'
+  },
+  {
+    menuName : '275'
   }
 ];
 
 export const regionFilterCategory = [
   {
-    menuName : '빨강'
+    menuName : 'red'
   },
   {
-    menuName : '주황'
+    menuName : 'orange'
   },
   {
-    menuName : '노랑'
+    menuName : 'yellow'
   },
   {
-    menuName : '초록'
+    menuName : 'green'
   },
   {
-    menuName : '파랑'
+    menuName : 'blue'
   },
   {
-    menuName : '남색'
+    menuName : 'sky'
   },
   {
-    menuName : '보라'
+    menuName : 'pink'
   },
 ];
 
