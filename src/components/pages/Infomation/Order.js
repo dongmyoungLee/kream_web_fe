@@ -30,6 +30,46 @@ const Order = () => {
 
   const navigate = useNavigate();
 
+  const imgMatch = (imgSrc) => {
+    let tag = '';
+
+    switch (imgSrc) {
+      case 's1' :
+        tag = s1;
+      break;
+
+      case 's2' :
+        tag = s2;
+      break;
+
+      case 's3' :
+        tag = s3;
+      break;
+
+      case 's4' :
+        tag = s4;
+      break;
+
+      case 's5' :
+        tag = s5;
+      break;
+
+      case 's6' :
+        tag = s6;
+      break;
+
+      case 's7' :
+        tag = s7;
+      break;
+
+      case 's8' :
+        tag = s8;
+      break;
+    }
+
+    return <img style={{height : '100%'}} src={tag} />
+  }
+
 
 
   useEffect(() => {
@@ -39,8 +79,6 @@ const Order = () => {
           setUserPayInfo(res.data);
 
           res.data.forEach((item, idx) => {
-            console.log(item.delivery[0].deliveryStatus);
-
             switch (item.delivery[0].deliveryStatus) {
               case 1:
                 setDel1(prevDel1 => prevDel1 + 1);
@@ -173,7 +211,8 @@ const Order = () => {
               <div className={classes.deliContentLeft}>
                 <div className={classes.leftContents}>
                   <div className={classes.imgWrap}>
-                    <img src="https://png.pngtree.com/png-vector/20210414/ourlarge/pngtree-shoes-icon-design-template-illustration-png-image_3177407.jpg" className={classes.imgSize} />
+                    {/*<img src="https://png.pngtree.com/png-vector/20210414/ourlarge/pngtree-shoes-icon-design-template-illustration-png-image_3177407.jpg" className={classes.imgSize} />*/}
+                    {imgMatch(item.product.imgUrl)}
                   </div>
                   <div>
                     <p className={classes.firstText}>{item.product.brand}</p>
