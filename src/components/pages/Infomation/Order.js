@@ -35,32 +35,38 @@ const Order = () => {
   useEffect(() => {
     axios.get(`http://localhost:8080/api/v1/orders/${isLogin.memberSeq}`)
       .then((res) => {
-      if (res.status === 200) {
-        setUserPayInfo(res.data);
+        if (res.status === 200) {
+          setUserPayInfo(res.data);
 
-        console.log()
+          res.data.forEach((item, idx) => {
+            console.log(item.delivery[0].deliveryStatus);
 
-        switch (res.data[0].delivery[0].deliveryStatus) {
-          case 1 :
-            setDel1(1);
-          break;
+            switch (item.delivery[0].deliveryStatus) {
+              case 1:
+                setDel1(prevDel1 => prevDel1 + 1);
+                break;
 
-          case 2 :
-            setDel2(1);
-          break;
+              case 2:
+                setDel2(prevDel2 => prevDel2 + 1);
+                break;
 
-          case 3 :
-            setDel3(1);
-          break;
+              case 3:
+                setDel3(prevDel3 => prevDel3 + 1);
+                break;
 
-          case 4 :
-            setDel4(1);
-          break;
+              case 4:
+                setDel4(prevDel4 => prevDel4 + 1);
+                break;
+
+              default:
+                break;
+            }
+          });
         }
-      }
-    }).catch((err) => {
-      console.log(err);
-    })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
 
   }, []);
@@ -88,13 +94,24 @@ const Order = () => {
 
   }
 
+  const formatOrderDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+
   const inputComponent_carrerYn = isLogin.userJobCareerYn === "Y"  && <div>
     <InputDivComponent value={{first :isLogin.userLastCompany, second :isLogin.userLastJobGroup, third : isLogin.userLastJobGroupCareer, fourth : ''}} label="최종 경력" inputTitle={{first : '회사명', second : '직무', third : '재직기간', fourth :''}} />
     <div className={classes.line}></div>
   </div>
 
   return (
-    <MypageLayout remove_height="profile">
+    <MypageLayout  remove_height={userPayInfo.length > 1 ? '' : 'profile'}>
       <Applicant2 />
       <div className={classes.account}>
         <div className={classes.management_box}>
@@ -148,7 +165,7 @@ const Order = () => {
             <div className={classes.deliItem}>
               <div className={classes.rightDeli}>
                 <p>주문 번호 <span className={classes.spanHighlight}>{item.orderNum}</span></p>
-                <p>주문 일시 <span className={classes.spanHighlight}>{item.orderDate}</span></p>
+                <p>주문 일시 <span className={classes.spanHighlight}>{formatOrderDate(item.orderDate)}</span></p>
               </div>
             </div>
             <div className={classes.line3}></div>

@@ -118,13 +118,37 @@ const Details = () => {
     setIsAnswerModalOpen(false);
   }
 
+  const generateRandomCode = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomCode = '';
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomCode += characters.charAt(randomIndex);
+    }
+
+    return randomCode;
+  };
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const hours = String(today.getHours()).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+    const seconds = String(today.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  };
+
   const buyHandler = () => {
     const deleteBookmark = window.confirm("구매 하시겠습니까 ?");
+    const randomCode = generateRandomCode(10);
+    const orderDate = getCurrentDate();
 
     if (deleteBookmark) {
       axios.post(`http://localhost:8080/api/v1/orders/${productSeq}/${isLogin.memberSeq}`, {
-        "orderNum" : "SFLDLDSMF12",
-        "orderDate" : "2023-08-03",
+        "orderNum" : randomCode,
+        "orderDate" :orderDate,
         "paymentAmount" : productInfoData.price,
         "paymentMethod" : "card",
         "paymentStatus" : "결제",

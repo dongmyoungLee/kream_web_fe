@@ -132,7 +132,6 @@ const Login = () => {
       }
     })
     .catch((error) => {
-      debugger
       setIsMsgPopupOpen({show: true, msg: error.response.data.message === undefined ? '데이터베이스 오류 입니다. 관리자에게 문의하세요.' : error.response.data.message });
     })
   }
@@ -165,7 +164,6 @@ const Login = () => {
 
     emailValidService(idInput)
     .then((res) => {
-      debugger
       if (res.status === 200) {
         setUserMailCode(res.data);
         setIsMailValidPopupOpen({show: true, msg: '인증메일이 발송되었습니다.'});
