@@ -29,6 +29,8 @@ export const loginAction = (id, password) => apiClient.post('/api/v1/members/log
   password : password
 })
 
+
+
 export const executeJwtAuthenticationTokenService = (username, password) => apiClient.post('/api/v1/authenticate', {username, password})
 
 export const updateUserPwd = (id, currPwd, changePwd) => apiClient.post('/api/v1/user/loginUpdatePw', {

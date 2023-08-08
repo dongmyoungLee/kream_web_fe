@@ -79,12 +79,13 @@ const FindUserInfo = () => {
         return ;
       }
 
-      findIdService(phoneInput)
-        .then((res) => {
+      axios.get(`http://localhost:8080/api/v1/members/findId/${phoneInput}`).then((res) => {
+        if (res.status === 200) {
           setIsMsgPopupOpen({show: true, msg: `회원님의 아이디는 ${res.data.data} 입니다.`});
-        })
-        .catch((error) => {
-          setIsMsgPopupOpen({show: true, msg: error.response.data.data.message});
+        }
+      })
+        .catch((err) => {
+          setIsMsgPopupOpen({show: true, msg: err.response.data.data.message});
         })
 
     }

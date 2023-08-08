@@ -30,6 +30,7 @@ const Account = (props) => {
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
   useEffect(() => {
+
     axios.get(`http://localhost:8080/api/v1/members/${isLogin.id}`)
     .then((res) => {
       setUserPoint(res.data.data.point.pointBalance);

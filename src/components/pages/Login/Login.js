@@ -48,37 +48,19 @@ const Login = () => {
       return ;
     }
 
-    // if (!passCheck(passInput)) {
-    //   setIsMsgPopupOpen({show: true, msg: '비밀번호를 형식에 맞게 입력해주세요.'});
-    //   return ;
-    // }
-
     loginAction(idInput, passInput)
       .then((res)=> {
         if (res.data.status == "success") {
           // 로그인 성공
           navigate('/employment/human-resources');
           dispatch(loginCheckAction.loginInfoSet(res.data.data));
-        } else {
-          // 로그인 실패
-          setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
         }
+      }).catch((err) => {
+        debugger
+        // 로그인 실패
+        setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
       })
 
-
-    // login 인증함수..
-    // const loginFn = await login(idInput, passInput)
-    //   .then((res) => {
-    //     if (res.isLogin) {
-    //       // 로그인 성공
-    //       navigate('/employment/human-resources');
-    //       dispatch(loginCheckAction.loginInfoSet(res));
-    //     } else {
-    //       // 로그인 실패
-    //       setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
-    //     }
-    //
-    //   });
   }
 
   const closeMsgPopup = () => {
