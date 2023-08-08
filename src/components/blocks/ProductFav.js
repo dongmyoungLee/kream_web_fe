@@ -12,10 +12,16 @@ import cart from "../../asset/images/myhistory.png"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import PopupDom from "./PopupDom";
+import MsgPopup from "./MsgPopup";
+import ConfirmPopup from "./ConfirmPopup";
 const ProductFav = (props) => {
   const [productInfo, setProductInfo] = useState(props);
   const [imgSrc, setImgSrc] = useState(null);
   const memberSeq = useSelector(state => state.loginCheck.loginInfo.memberSeq);
+  const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
+  const [bookmarkFlag, setBookmarkFlag] = useState(false);
 
   useEffect(() => {
     switch (productInfo.product.imgUrl) {
@@ -51,22 +57,33 @@ const ProductFav = (props) => {
   }, [props.imgUrl]);
 
   const deleteBookMark = () => {
-    const deleteBookmark = window.confirm("관심 상품을 삭제 하시겠습니까 ?");
+    setBookmarkFlag(true);
+    setIsConfirmPopupOpen({show: true, msg: '관심 상품을 삭제 하시겠습니까 ?'});
+  }
 
-    if (deleteBookmark) {
-      console.log(productInfo.product.productSeq)
+  const closeMsgPopup = () => {
+    setIsMsgPopupOpen({show: false, msg: ''});
+  }
+  const closeConfirmPopup = () => {
+    setIsConfirmPopupOpen({show: false, msg: ''});
+  }
+
+  const confirmHandler = () => {
+
+    if(bookmarkFlag) {
+
       axios.delete(`http://localhost:8080/api/v1/interests/${memberSeq}/${productInfo.product.productSeq}`).then((res) => {
 
         if (res.status === 200) {
-          alert("해당 관심정보가 삭제 되었습니다.");
-          // props.observer();
           props.onDelete(productInfo.product.productSeq);
         }
       })
         .catch((err) => {
 
         })
+
     }
+
   }
 
   return (
@@ -85,7 +102,14 @@ const ProductFav = (props) => {
           <p onClick={deleteBookMark} style={{cursor : 'pointer'}}>삭제</p>
         </div>
       </div>
-
+      <div id='popupDom'>
+        {isMsgPopupOpen.show && <PopupDom>
+          <MsgPopup onClick={closeMsgPopup} msg={isMsgPopupOpen.msg} />
+        </PopupDom>}
+        {isConfirmPopupOpen.show && <PopupDom>
+          <ConfirmPopup onConfirm={confirmHandler} onClick={closeConfirmPopup} msg={isConfirmPopupOpen.msg} />
+        </PopupDom>}
+      </div>
     </div>
   );
 }

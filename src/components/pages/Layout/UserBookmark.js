@@ -10,6 +10,9 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Product from "../../blocks/Product";
 import ProductFav from "../../blocks/ProductFav";
+import PopupDom from "../../blocks/PopupDom";
+import MsgPopup from "../../blocks/MsgPopup";
+import ConfirmPopup from "../../blocks/ConfirmPopup";
 
 const UserBookmark = () => {
   const [category, setCategory] = useState('Nike');
@@ -195,7 +198,7 @@ const UserBookmark = () => {
           <CategorySection setCategory={setCategory} />
           <section className={classes.filterSection}>
             {/*<article className={classes.filterArticle}>*/}
-            {/*  <FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="직무" count={selectJobCategoryCount}/>*/}
+            {/*  <FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} vaue="직무" count={selectJobCategoryCount}/>*/}
 
             {/*  <FilterButton userMemoryFilter={userCareerFilter} onChange={checkBoxChangeCareerHandler} onClick={detailMenuCareerShow} left="92px" isDetailMenuShow={isDetailCareerMenuShow} menuHide={setIsDetailCareerMenuShow} menuList={careerFilterCategory} value="경력" count={selectCareerCategoryCount}/>*/}
 
@@ -214,6 +217,7 @@ const UserBookmark = () => {
             </div>
           </section>
         </Layout>
+
       </>
   );
 }
