@@ -56,7 +56,6 @@ const Login = () => {
           dispatch(loginCheckAction.loginInfoSet(res.data.data));
         }
       }).catch((err) => {
-        debugger
         // 로그인 실패
         setIsMsgPopupOpen({show: true, msg: '로그인 정보가 일치하지 않습니다.'});
       })
