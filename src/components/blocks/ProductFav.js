@@ -46,17 +46,21 @@ const ProductFav = (props) => {
       default:
         setImgSrc(null);
     }
+
+    setProductInfo(props);
   }, [props.imgUrl]);
 
   const deleteBookMark = () => {
     const deleteBookmark = window.confirm("관심 상품을 삭제 하시겠습니까 ?");
 
     if (deleteBookmark) {
+      console.log(productInfo.product.productSeq)
       axios.delete(`http://localhost:8080/api/v1/interests/${memberSeq}/${productInfo.product.productSeq}`).then((res) => {
 
         if (res.status === 200) {
           alert("해당 관심정보가 삭제 되었습니다.");
-          props.observer();
+          // props.observer();
+          props.onDelete(productInfo.product.productSeq);
         }
       })
         .catch((err) => {

@@ -37,13 +37,14 @@ const UserBookmark = () => {
   useEffect(() => {
     axios.get(`http://localhost:8080/api/v1/members`).then((res) => {
       if (res.status === 200) {
-        setProductList(res.data[0].interests);
+        const newProductList = [...res.data[0].interests];
+        setProductList(newProductList);
       }
     })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [observer])
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
 
   useEffect(() => {
@@ -181,6 +182,10 @@ const UserBookmark = () => {
     navigate(`/member/details/${productSeq}`);
   }
 
+  const handleProductDelete = (deletedProductSeq) => {
+    setProductList(prevList => prevList.filter(item => item.productSeq !== deletedProductSeq));
+  }
+
   return (
       <>
         <Layout >
@@ -203,7 +208,7 @@ const UserBookmark = () => {
           <section className={classes.mainContents}>
             <div className={classes.mainCardWrap2}>
               {productList.length != 0 && productList.map((item, idx) => (
-                <ProductFav observer={() => setObserver(!observer)} product={item} idx={idx} key={idx} onClick={() => goToDetails(item.productSeq)} />
+                <ProductFav  onDelete={handleProductDelete} observer={() => setObserver(!observer)} product={item} idx={idx} key={item.productSeq} onClick={() => goToDetails(item.productSeq)} />
               ))}
               {productList.length == 0 && <p style={{fontWeight : '500', fontSize : '18px'}}>관심 정보가 없습니다.</p>}
             </div>
