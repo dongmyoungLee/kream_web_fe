@@ -40,11 +40,12 @@ const HumanResources = () => {
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
   const [requestSize, setRequestSize] = useState('');
   const [saveData, setSaveData] = useState([]);
+  const [filteredProductList, setFilteredProductList] = useState(productList);
+
 
   useEffect(() => {
     // productList 상태 업데이트 후에 화면 다시 렌더링
     // productList 상태가 변경될 때마다 실행됩니다.
-    console.log(productList)
    }, [productList]);
 
   useEffect(() => {
@@ -239,7 +240,6 @@ const HumanResources = () => {
           if (res.status === 200) {
             // 데이터 업데이트 후 렌더링을 강제로 다시 실행
             setProductList(res.data.data);
-            console.log(res.data.data)
           }
         })
         .catch((err) => {
@@ -290,6 +290,10 @@ const HumanResources = () => {
     navigate(`/member/details/${productSeq}`);
   }
 
+  const searchProductList = (e) => {
+    console.log(e.target.value)
+  }
+
 
 
   return (
@@ -317,7 +321,7 @@ const HumanResources = () => {
               </div>
             </div></div>
 
-          <CategorySection setCategory={setCategory} />
+          <CategorySection productList={searchProductList} setCategory={setCategory} />
           <section className={classes.filterSection}>
             <article className={classes.filterArticle}>
               {/*<FilterButton userMemoryFilter={userJobFilter} onChange={checkBoxChangeHandler} onClick={detailMenuJobShow} isDetailMenuShow={isDetailJobMenuShow} menuHide={setIsDetailJobMenuShow} menuList={filterJobList} value="카테고리" count={selectJobCategoryCount}/>*/}

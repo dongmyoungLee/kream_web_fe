@@ -49,6 +49,14 @@ const CategorySection = (props) => {
                                                   </ul>
                                                 </div>
                                                 : null;
+  const handleSearchInputKeyPress = (e) => {
+    // Check if the key pressed is the Enter key (key code 13)
+    e.preventDefault();
+    if (e.key === "Enter") {
+      // Trigger the search when the user presses Enter
+      props.productList(e);
+    }
+  };
 
   return (
     <>
@@ -62,7 +70,7 @@ const CategorySection = (props) => {
         <article className={classes.searchCategory}>
           <form className={classes.formStyle}>
             <img src={search} className={classes.imgOption} />
-            <input className={classes.inputOption} type="search" placeholder="이름 검색" />
+            <input onKeyDown={handleSearchInputKeyPress} className={classes.inputOption} type="search" placeholder="이름 검색" />
             <button className="btnClear"></button>
           </form>
         </article>

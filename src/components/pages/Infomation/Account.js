@@ -35,7 +35,6 @@ const Account = (props) => {
     .then((res) => {
       setUserPoint(res.data.data.point.pointBalance);
       setUserGrade(res.data.data.grade.gradeName);
-      console.log(res.data.data);
     })
     .catch((err) => {
 

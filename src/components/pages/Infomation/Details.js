@@ -34,19 +34,21 @@ const Details = () => {
   const [review, setReview] = useState('');
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
+
 
     axios.get(`http://localhost:8080/api/v1/products/${productSeq}`).then((res) => {
       if (res.status === 200) {
         setProductInfoData(res.data);
-        console.log(res.data)
       }
     })
-      .catch((err) => {
-        console.log(err);
-      })
+    .catch((err) => {
+      console.log(err);
+    })
 
 
   }, [observer]);
@@ -167,6 +169,19 @@ const Details = () => {
         })
     }
 
+  }
+
+  const likeHandler = (review) => {
+
+    axios.post(`http://localhost:8080/api/v1/reviews/${review.reviewSeq}/like/${isLogin.memberSeq}`)
+      .then((res) => {
+        if(res.status == 200) {
+          setObserver(!observer);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
@@ -312,14 +327,14 @@ const Details = () => {
 
           <div className={classes.reviewWrap}>
             {productInfoData.reviewDto != undefined && productInfoData.reviewDto.map((item, idx) => (
-              <div key={idx} onClick={() => {reviewPopup(item)}} className={classes.review}>
-                <div>
+              <div key={idx} className={classes.review}>
+                <div onClick={() => {reviewPopup(item)}}>
                   <img style={{width : '100%', height : '250px', borderRadius : '10px'}} src={item.reviewImg} />
                 </div>
                 <div className={classes.infoArea}>
                   <div className={classes.reviewTitle}>
                     <p style={{color : 'rgba(34,34,34,.5)'}}>{`user0${idx+1}`}</p>
-                    <div className={classes.reviewLike}>
+                    <div className={classes.reviewLike} onClick={() => {likeHandler(item)}}>
                       <p>♡</p>
                       <p>{item.heart == null ? 0 : item.heart}</p>
                     </div>
