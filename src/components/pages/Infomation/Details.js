@@ -214,7 +214,8 @@ const Details = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setIsMsgPopupOpen({show: true, msg: err.response.data.data.message});
+        setIsConfirmPopupOpen({show: false, msg: ''});
       })
     }
 

@@ -14,6 +14,7 @@ import MsgPopup from "../../blocks/MsgPopup";
 import { useNavigate } from "react-router-dom";
 import { loginCheckAction } from "../../../ducks/loginCheck";
 import InputBox from "../../blocks/InputBox";
+import ConfirmPopup from "../../blocks/ConfirmPopup";
 
 const Account = (props) => {
   const [currentPwd, setCurrentPwd] = useState("");
@@ -21,10 +22,12 @@ const Account = (props) => {
   const [changePwd,  setChangePwd] = useState("");
   const [changeCheckPwd, setChangeCheckPwd] = useState("");
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
   const [userGrade, setUserGrade] = useState('');
   const [userPoint, setUserPoint] = useState(0);
   const [observer, setObserver] = useState(false);
   const [userHistory, setUserHistory] = useState([]);
+  const [pointFlag, setPointFlag] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
@@ -156,24 +159,39 @@ const Account = (props) => {
     setIsMsgPopupOpen({show: false, msg: ''});
   }
 
+  const closeConfirmPopup = () => {
+    setPointFlag(false);
+    setIsConfirmPopupOpen({show: false, msg: ''});
+    setIsMsgPopupOpen({show: false, msg: ''});
+
+  }
+
   const chargePwdSubmit = () => {
 
-    axios.put(`http://localhost:8080/api/v1/members/charge/${isLogin.id}`, {
-      "pointBalance" : chargeData
-    }).then((res) => {
-      if (res.status === 200) {
-        const confirm1 = window.confirm(`정말로 ${chargeData.toLocaleString()}원을 충전 하시겠습니까 ?`);
+    setIsConfirmPopupOpen({show: true, msg: `정말로 ${chargeData.toLocaleString()}원 을 충전 하시겠습니까 ?`});
+    setPointFlag(true);
+  }
 
-        if (confirm1) {
-          alert("포인트 충전이 완료 되었습니다.");
+  const confirmHandler = () => {
+
+    if (pointFlag) {
+
+      axios.put(`http://localhost:8080/api/v1/members/charge/${isLogin.id}`, {
+        "pointBalance" : chargeData
+      }).then((res) => {
+        if (res.status === 200) {
+          setIsConfirmPopupOpen({show: false, msg: ``});
+          setIsMsgPopupOpen({show: true, msg: "포인트 충전이 완료 되었습니다."});
           setObserver(!observer);
           setChargeData(0);
         }
-
-      }
-    }).catch((err) => {
+      }).catch((err) => {
         console.log(err);
-    })
+      })
+
+
+    }
+
   }
 
 
@@ -285,9 +303,12 @@ const Account = (props) => {
         </div>
       </Mobile>
       <div id='popupDom'>
-          {isMsgPopupOpen.show && <PopupDom>
-            <MsgPopup onClick={closeMsgPopup} msg={isMsgPopupOpen.msg} />
-          </PopupDom>}
+        {isMsgPopupOpen.show && <PopupDom>
+          <MsgPopup onClick={closeMsgPopup} msg={isMsgPopupOpen.msg} />
+        </PopupDom>}
+        {isConfirmPopupOpen.show && <PopupDom>
+          <ConfirmPopup onConfirm={confirmHandler} onClick={closeConfirmPopup} msg={isConfirmPopupOpen.msg} />
+        </PopupDom>}
       </div>
     </>
   );
