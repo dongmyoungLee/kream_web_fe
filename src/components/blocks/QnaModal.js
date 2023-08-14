@@ -24,7 +24,6 @@ const QnaModal = (props) => {
     })
       .then((res) => {
         if(res.status == 200) {
-          alert("Q&A 가 등록 되었습니다.");
           props.onClose();
         }
       })

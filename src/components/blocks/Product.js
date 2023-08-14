@@ -26,6 +26,7 @@ const Product = (props) => {
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
   const [bookmarkFlag, setBookmarkFlag] = useState(false);
+  const [cartFlag, setCartFlag] = useState(false);
   const navigate = useNavigate();
 
 
@@ -78,7 +79,8 @@ const Product = (props) => {
       return;
     }
 
-    alert("장바구니 추가");
+    setCartFlag(true);
+    setIsConfirmPopupOpen({show: true, msg: '장바구니에 추가 하시겠습니까 ?'});
   }
 
   const closeMsgPopup = () => {
@@ -112,9 +114,13 @@ const Product = (props) => {
           }
         })
         .catch((err) => {
-
+          setIsMsgPopupOpen({show: true, msg: err.response.data.data.message});
+          setIsConfirmPopupOpen({show: false, msg: ''});
         })
+    }
 
+    if(cartFlag) {
+      // 장바구니 추가 로직..
     }
 
   }

@@ -38,6 +38,7 @@ const Details = () => {
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
+  const [orderFlag, setOrderFlag] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,11 +99,13 @@ const Details = () => {
   };
 
   const closeModal = () => {
+    setIsMsgPopupOpen({show: true, msg: 'Q&A 가 등록 되었습니다.'});
     setIsModalOpen(false);
     setObserver(!observer);
   };
 
   const closeReviewModal = () => {
+    setIsMsgPopupOpen({show: true, msg: 'Q&A 가 등록 되었습니다.'});
     setIsReviewModalOpen(false);
     setObserver(!observer);
   };
@@ -157,32 +160,8 @@ const Details = () => {
   };
 
   const buyHandler = () => {
-    const deleteBookmark = window.confirm("구매 하시겠습니까 ?");
-    const randomCode = generateRandomCode(10);
-    const orderDate = getCurrentDate();
-
-    if (deleteBookmark) {
-      axios.post(`http://localhost:8080/api/v1/orders/${productSeq}/${isLogin.memberSeq}`, {
-        "orderNum" : randomCode,
-        "orderDate" :orderDate,
-        "paymentAmount" : productInfoData.price,
-        "paymentMethod" : "card",
-        "paymentStatus" : "결제",
-        "cardType" : "신한",
-        "paymentDate" : "2023-08-03T15:23:23",
-        "recipientAddress" : isLogin.address,
-        "memberSeq" : isLogin.memberSeq
-      })
-        .then((res) => {
-          if(res.status == 200) {
-            alert("구매가 완료되었습니다.");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    }
-
+    setOrderFlag(true);
+    setIsConfirmPopupOpen({show: true, msg: '구매 하시겠습니까 ? '});
   }
 
   const likeHandler = (review) => {
@@ -205,12 +184,39 @@ const Details = () => {
 
   const closeMsgPopup = () => {
     setIsMsgPopupOpen({show: false, msg: ''});
+    setIsConfirmPopupOpen({show: false, msg: ''});
   }
   const closeConfirmPopup = () => {
     setIsConfirmPopupOpen({show: false, msg: ''});
+    setIsMsgPopupOpen({show: false, msg: ''});
   }
 
   const confirmHandler = () => {
+
+    if(orderFlag) {
+      const randomCode = generateRandomCode(10);
+      const orderDate = getCurrentDate();
+
+      axios.post(`http://localhost:8080/api/v1/orders/${productSeq}/${isLogin.memberSeq}`, {
+        "orderNum" : randomCode,
+        "orderDate" :orderDate,
+        "paymentAmount" : productInfoData.price,
+        "paymentMethod" : "card",
+        "paymentStatus" : "결제",
+        "cardType" : "신한",
+        "paymentDate" : "2023-08-03T15:23:23",
+        "recipientAddress" : isLogin.address,
+        "memberSeq" : isLogin.memberSeq
+      })
+      .then((res) => {
+        if(res.status == 200) {
+          setIsMsgPopupOpen({show: true, msg: '구매가 완료 되었습니다.'});
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
 
   }
 

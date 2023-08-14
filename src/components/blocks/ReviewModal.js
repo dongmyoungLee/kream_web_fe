@@ -30,7 +30,6 @@ const ReviewModal = (props) => {
       "heart" : 0
     }).then((res) => {
       if (res.status === 200) {
-        alert("리뷰가 등록 되었습니다.");
         props.onClose();
       }
     })
