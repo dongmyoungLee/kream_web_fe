@@ -19,7 +19,7 @@ const MypageList = (props) => {
   return (
       <li className={clickStyle ? classes.li_back_option : classes.li_option} onClick={props.onClick} style={{borderRadius : props.borderRaPx, marginBottom : props.marginBot}}>
         <img src={props.imgPath} className={classes.img_option} alt='mypageMenu'/>
-        <span>{props.menuTitle}</span>
+        <span style={{color : props.color, fontWeight : props.weight}}>{props.menuTitle}</span>
       </li>
   );
 }

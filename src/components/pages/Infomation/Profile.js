@@ -44,7 +44,7 @@ const Profile = () => {
 
   return (
     <MypageLayout remove_height="profile" >
-      <Applicant /> 
+      <Applicant />
       <div className={classes.account}>
          <div className={classes.management_box}>
             <div className={classes.dark}>
@@ -67,14 +67,14 @@ const Profile = () => {
          {/*<InputDivComponent value={{first :isLogin.userDesiredJobGroup, second :isLogin.userDesiredJob, third : isLogin.userDesiredJobGroupCareer, fourth :isLogin.userJobSkill}}*/}
          {/*label="희망 직무" inputTitle={{first : '직군', second : '직무', third : '직무경력', fourth : '주요스킬'}} />*/}
          {/*<div className={classes.line}></div>*/}
-        
+
         {/* userJobCareerYn 이 Y일때만 보여주는 최종경력 */}
         {/*{inputComponent_carrerYn}*/}
 
          {/*<InputDivComponent value={{first :isLogin.userLastSchoolName, second :isLogin.userLastSchoolStatus, third :isLogin.userLastSchoolDept, fourth : ''}} label="최종 학력" inputTitle={{first : '학교명', second : '이수상태', third : '학과명', fourth : ''}} />*/}
 
          {/*<div className={classes.line}></div>*/}
-         
+
          {/*<div className={classes.input_layout}>*/}
          {/*   <div>이력서</div>*/}
          {/*   <div> */}

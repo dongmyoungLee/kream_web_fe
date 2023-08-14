@@ -167,8 +167,7 @@ const Account = (props) => {
   }
 
   const chargePwdSubmit = () => {
-
-    setIsConfirmPopupOpen({show: true, msg: `정말로 ${chargeData.toLocaleString()}원 을 충전 하시겠습니까 ?`});
+    setIsConfirmPopupOpen({show: true, msg: `정말로 ${Number(chargeData).toLocaleString()}원 을 충전 하시겠습니까 ?`});
     setPointFlag(true);
   }
 
@@ -242,7 +241,7 @@ const Account = (props) => {
             <div className={classes.line}></div>
             <div className={classes.input_layout}>
               <div>포인트 충전</div>
-              <InputBox value={chargeData} onChange={chargePwdHandler} type="text" inputTitle="충전할 포인트"  placeholder="1,000,000" />
+              <InputBox value={chargeData} onChange={chargePwdHandler} type="number" inputTitle="충전할 포인트"  placeholder="1,000,000" />
             </div>
 
             <div style={{display : 'flex', justifyContent : 'flex-end', paddingRight : '30px'}}>

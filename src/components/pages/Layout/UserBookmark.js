@@ -39,6 +39,7 @@ const UserBookmark = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/v1/members`).then((res) => {
+      debugger
       if (res.status === 200) {
         const newProductList = [...res.data[0].interests];
         setProductList(newProductList);

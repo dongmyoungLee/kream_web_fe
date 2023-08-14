@@ -7,13 +7,14 @@ import logout from '../../asset/images/logout.png';
 import {pageNavigatorAction} from "../../ducks/pageNavigator";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useRef} from "react";
+import settingImg from "../../asset/images/myaccount.png";
 
 const MypageToolTipMenu = (props) => {
   const dispatch = useDispatch();
   const isTooltipMenu = useSelector(state => state.pageNavigator.isMobileTooltipMenu);
   const navigate = useNavigate();
   const myMenuRef = useRef(null);
-
+  const isLogin = useSelector(state => state.loginCheck.loginInfo);
 
   const clickMethods = (flag) => {
     dispatch(pageNavigatorAction.isMobileTooltipMenu(!isTooltipMenu));
@@ -59,10 +60,11 @@ const MypageToolTipMenu = (props) => {
         <div className={classes.space1}></div>
         <div className={classes.mypageMenu} ref={myMenuRef}>
           <ul className={classes.flexOption}>
-            {mypageFavMenu.map((item, idx) => (
+            {isLogin.id === 'pajang1515@gmail.com' &&  <MypageList weight='600' color='red' menuTitle='관리자 메뉴' imgPath={settingImg} onClick={() => {clickMethods('admin')}} />}
+            {isLogin.id !== 'pajang1515@gmail.com' && mypageFavMenu.map((item, idx) => (
                 <MypageList key={item.menuName} menuTitle={item.menuName} imgPath={item.imgPath} onClick={() => {clickMethods(item.clickFlag)}} />
             ))}
-            {mypageTooltipMenu.map((item, idx) => (
+            {isLogin.id !== 'pajang1515@gmail.com' && mypageTooltipMenu.map((item, idx) => (
                 <MypageList key={item.menuName} menuTitle={item.menuName} imgPath={item.imgPath} onClick={() => {clickMethods(item.clickFlag)}} />
             ))}
             <MypageList menuTitle='로그아웃' imgPath={logout} onClick={() => {logoutHandler()}} />

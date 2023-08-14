@@ -60,6 +60,46 @@ export const mypageTooltipMenu = [
     },
 ];
 
+export const mypageTooltipAdminMenu = [
+
+    {
+      menuName : '상품 관리',
+      imgPath : myAccount,
+      clickFlag : 'productAdmin',
+      path : '/member/productAdmin',
+    },
+    {
+      menuName : 'Q&A 관리',
+      imgPath : myAccount,
+      clickFlag: 'qnaAdmin',
+      path : '/member/productQnA',
+    },
+    {
+      menuName : '리뷰 관리',
+      imgPath : myAccount,
+      clickFlag: 'reviewAdmin',
+      path : '/member/reviewAdmin',
+    },
+    {
+      menuName : '사용자 관리',
+      imgPath : myAccount,
+      clickFlag: 'memberAdmin',
+      path : '/member/memberAdmin',
+    },
+    {
+      menuName : '주문 결제 관리',
+      imgPath : myAccount,
+      clickFlag: 'orderAdmin',
+      path : '/member/orderAdmin',
+    },
+    {
+      menuName : '배송 관리',
+      imgPath : myAccount,
+      clickFlag: 'deliveryAdmin',
+      path : '/member/deliveryAdmin',
+    },
+];
+
 export const mypageTooltipMenu2 = [
 
   {

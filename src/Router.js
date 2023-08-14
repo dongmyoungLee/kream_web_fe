@@ -16,6 +16,13 @@ import ProfileUpdate from './components/pages/Infomation/ProfileUpdate';
 import UserBookmark from "./components/pages/Layout/UserBookmark";
 import Order from "./components/pages/Infomation/Order";
 import Details from "./components/pages/Infomation/Details";
+import Admin from "./components/pages/Layout/Admin";
+import ProductAdmin from "./components/pages/Infomation/ProductAdmin";
+import QnaAdmin from "./components/pages/Infomation/QnaAdmin";
+import ReviewAdmin from "./components/pages/Infomation/ReviewAdmin";
+import MemberAdmin from "./components/pages/Infomation/MemberAdmin";
+import OrderAdmin from "./components/pages/Infomation/OrderAdmin";
+import DeliveryAdmin from "./components/pages/Infomation/DeliveryAdmin";
 
 const router = createBrowserRouter([
   {
@@ -65,11 +72,41 @@ const router = createBrowserRouter([
       {
         path : 'order',
         element: <Order />
-      }
-      ,{
+      },
+      {
+        path : 'admin',
+        element: <Admin />
+      },
+      {
+        path : 'productAdmin',
+        element: <ProductAdmin />
+      },
+      {
+        path : 'qnaAdmin',
+        element: <QnaAdmin />
+      },
+      {
+        path : 'reviewAdmin',
+        element: <ReviewAdmin />
+      },
+      {
+        path : 'memberAdmin',
+        element: <MemberAdmin />
+      },
+      {
+        path : 'orderAdmin',
+        element: <OrderAdmin />
+      },
+      {
+        path : 'DeliveryAdmin',
+        element: <DeliveryAdmin />
+      },
+
+      {
         path : 'details/:productSeq',
         element: <Details />
       },
+
 
     ]
   },
