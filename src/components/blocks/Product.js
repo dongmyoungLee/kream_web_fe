@@ -15,6 +15,7 @@ import {useSelector} from "react-redux";
 import PopupDom from "./PopupDom";
 import MsgPopup from "./MsgPopup";
 import ConfirmPopup from "./ConfirmPopup";
+import {useNavigate} from "react-router-dom";
 const Product = (props) => {
   const [productInfo, setProductInfo] = useState(props);
   const [imgSrc, setImgSrc] = useState(null);
@@ -25,6 +26,8 @@ const Product = (props) => {
   const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
   const [bookmarkFlag, setBookmarkFlag] = useState(false);
+  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -70,12 +73,20 @@ const Product = (props) => {
   }
 
   const cartHandler = () => {
-
+    if (isLogin.id == null) {
+      setIsMsgPopupOpen({show: true, msg: '로그인 후 이용하세요.'});
+      return;
+    }
 
     alert("장바구니 추가");
   }
 
   const closeMsgPopup = () => {
+
+    if (isLogin.id == null) {
+      navigate("/member/login");
+    }
+
     setIsMsgPopupOpen({show: false, msg: ''});
   }
   const closeConfirmPopup = () => {

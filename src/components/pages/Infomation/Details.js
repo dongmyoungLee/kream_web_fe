@@ -19,6 +19,9 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import QnaModalView from "../../blocks/QnaModalView";
 import {useSelector} from "react-redux";
+import PopupDom from "../../blocks/PopupDom";
+import MsgPopup from "../../blocks/MsgPopup";
+import ConfirmPopup from "../../blocks/ConfirmPopup";
 
 
 const Details = () => {
@@ -33,6 +36,8 @@ const Details = () => {
   const [qnAIdx, setQnAIdx] = useState(0);
   const [review, setReview] = useState('');
   const isLogin = useSelector(state => state.loginCheck.loginInfo);
+  const [isMsgPopupOpen, setIsMsgPopupOpen] = useState({show : false, msg: ''});
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState({show : false, msg: ''});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -85,6 +90,10 @@ const Details = () => {
     }
   }, [productInfoData.detailImgUrl]);
   const qnaHandler = () => {
+    if (isLogin.id == null) {
+      setIsMsgPopupOpen({show: true, msg: '로그인 후 이용하세요.'});
+      return;
+    }
     setIsModalOpen(true);
   };
 
@@ -103,6 +112,11 @@ const Details = () => {
   };
 
   const reviewHandler = () => {
+    if (isLogin.id == null) {
+      setIsMsgPopupOpen({show: true, msg: '로그인 후 이용하세요.'});
+      return;
+    }
+
     setIsReviewModalOpen(true);
   }
 
@@ -173,6 +187,11 @@ const Details = () => {
 
   const likeHandler = (review) => {
 
+    if (isLogin.id == null) {
+      setIsMsgPopupOpen({show: true, msg: '로그인 후 이용하세요.'});
+      return;
+    }
+
     axios.post(`http://localhost:8080/api/v1/reviews/${review.reviewSeq}/like/${isLogin.memberSeq}`)
       .then((res) => {
         if(res.status == 200) {
@@ -182,6 +201,17 @@ const Details = () => {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  const closeMsgPopup = () => {
+    setIsMsgPopupOpen({show: false, msg: ''});
+  }
+  const closeConfirmPopup = () => {
+    setIsConfirmPopupOpen({show: false, msg: ''});
+  }
+
+  const confirmHandler = () => {
+
   }
 
   return (
@@ -347,7 +377,14 @@ const Details = () => {
             ))}
             {productInfoData.reviewDto != undefined && productInfoData.reviewDto.length == 0 && <p style={{padding : '20px 20px 20px 0'}}>등록된 리뷰가 없습니다.</p>}
           </div>
-
+          <div id='popupDom'>
+            {isMsgPopupOpen.show && <PopupDom>
+              <MsgPopup onClick={closeMsgPopup} msg={isMsgPopupOpen.msg} />
+            </PopupDom>}
+            {isConfirmPopupOpen.show && <PopupDom>
+              <ConfirmPopup onConfirm={confirmHandler} onClick={closeConfirmPopup} msg={isConfirmPopupOpen.msg} />
+            </PopupDom>}
+          </div>
         </div>
       </Layout>
     </>
