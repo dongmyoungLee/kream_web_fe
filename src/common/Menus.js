@@ -11,7 +11,11 @@ export const headerMenu = [
     {
       menuName : 'Shoes',
       menuLink : '/employment/human-resources'
-    }
+    },
+    {
+      menuName : 'Mbti',
+      menuLink : '/employment/mbti'
+    },
     // {
     //   menuName : '남성',
     //   menuLink : '/employment/announcement'

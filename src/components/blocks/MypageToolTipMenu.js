@@ -60,7 +60,7 @@ const MypageToolTipMenu = (props) => {
         <div className={classes.space1}></div>
         <div className={classes.mypageMenu} ref={myMenuRef}>
           <ul className={classes.flexOption}>
-            {isLogin.id === 'pajang1515@gmail.com' &&  <MypageList weight='600' color='red' menuTitle='관리자 메뉴' imgPath={settingImg} onClick={() => {clickMethods('admin')}} />}
+            {isLogin.id === 'pajang1515@gmail.com' &&  <MypageList weight='600' color='red' menuTitle='관리자 메뉴' imgPath={settingImg} onClick={() => {clickMethods('productAdmin')}} />}
             {isLogin.id !== 'pajang1515@gmail.com' && mypageFavMenu.map((item, idx) => (
                 <MypageList key={item.menuName} menuTitle={item.menuName} imgPath={item.imgPath} onClick={() => {clickMethods(item.clickFlag)}} />
             ))}

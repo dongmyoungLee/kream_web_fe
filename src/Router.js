@@ -3,7 +3,7 @@ import App from "./App";
 import Login from "./components/pages/Login/Login";
 import Company from "./components/pages/Infomation/Company";
 import HumanResources from "./components/pages/Layout/HumanResources";
-import Announcement from "./components/pages/Layout/Announcement";
+import Mbti from "./components/pages/Layout/Mbti";
 import Signup from "./components/pages/Login/Signup";
 import Resize from "./components/pages/Layout/Resize";
 import FindUserInfo from "./components/pages/Login/FindUserInfo";
@@ -101,7 +101,6 @@ const router = createBrowserRouter([
         path : 'DeliveryAdmin',
         element: <DeliveryAdmin />
       },
-
       {
         path : 'details/:productSeq',
         element: <Details />
@@ -123,8 +122,8 @@ const router = createBrowserRouter([
         element: <HumanResources />
       },
       {
-        path: 'announcement',
-        element: <Announcement />
+        path: 'mbti',
+        element: <Mbti />
       },
       {
         path: 'resize',
